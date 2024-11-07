@@ -23,7 +23,7 @@ This chapter is a very brief introduction to the concepts of matrix sparse which
 When dealing with large array that are sparse (lot of element equal to 0), it is inneficient to store this object as a dense matrix. Large matrix are sometimes difficult to store in the memory because they are weighty, when they dealing with sparse we can store it and do calculation with them in a very efficient way using the 'Compressed Sparse Column' (CSC) format. See how it change the weight of the matrix when changing the format to sparse matrix .
 
 <div class = "row">
-<div class = "col-md-6">
+
 <div class = "r">
 
 ```{r, error=TRUE ,collapse = TRUE}
@@ -56,7 +56,6 @@ toc()
 
 </div>
 </div>
-</div>
 
 
 
@@ -71,7 +70,7 @@ Let's make an example where the goal will be to make a bootstrap with a linear m
 Let's create first the dataset
 
 <div class = "row">
-<div class = "col-md-6">
+
 <div class = "r">
 
 ```{r,error=TRUE , collapse = TRUE}
@@ -139,7 +138,6 @@ toc()
 ```
 </div>
 </div>
-</div>
 
 
 
@@ -152,7 +150,7 @@ For example, if we expect that 99% of the time the result will contain something
 While an 'if' statement always has a cost, setting up a try/except block is relatively inexpensive. However, when an exception does occur, the cost is much higher.
 
 <div class = "row">
-<div class = "col-md-6">
+
 <div class = "r">
 
 ```{r,error=TRUE ,warning=F}
@@ -273,7 +271,6 @@ results <- lapply(list_,FUN = calc_try)
 Sys.time()-t
 
 ```
-</div>
 </div>
 </div>
 

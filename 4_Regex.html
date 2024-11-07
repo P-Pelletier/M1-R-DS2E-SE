@@ -419,11 +419,11 @@ length(which(strsplit(wd_info,split = &#39;&#39;)[[1]]==&#39;s&#39;))
 
 # modify the string
 toTitleCase(wd_info)
-## [1] &quot;Current Working Directory: C:/Users/Pierre/Documents/GitHub/M1-R-SE-DS2E&quot;
+## [1] &quot;Current Working Directory: C:/Users/Pierre/Documents/GitHub/M1-R-DS2E-SE&quot;
 toupper(wd_info)
-## [1] &quot;CURRENT WORKING DIRECTORY: C:/USERS/PIERRE/DOCUMENTS/GITHUB/M1-R-SE-DS2E&quot;
+## [1] &quot;CURRENT WORKING DIRECTORY: C:/USERS/PIERRE/DOCUMENTS/GITHUB/M1-R-DS2E-SE&quot;
 tolower(wd_info)
-## [1] &quot;current working directory: c:/users/pierre/documents/github/m1-r-se-ds2e&quot;</code></pre>
+## [1] &quot;current working directory: c:/users/pierre/documents/github/m1-r-ds2e-se&quot;</code></pre>
 <pre class="r"><code>paste0(&#39;a :&#39;,&#39;1&#39;,&#39;b :&#39;,&#39;2&#39;,&#39;c :&#39;,&#39;3&#39;)
 ## [1] &quot;a :1b :2c :3&quot;
 paste(&#39;a :&#39;,&#39;1&#39;,&#39;b :&#39;,&#39;2&#39;,&#39;c :&#39;,&#39;3&#39;)
@@ -467,11 +467,11 @@ wd_info = &#39;\nCurrent working directory: &#39;
 infos &lt;- paste0(time_info,time_,
            wd_info,wd)
 print(infos) 
-## [1] &quot;Time: 2024-10-28 10:26:00\nCurrent working directory: C:/Users/pierre/Documents/GitHub/M1-R-SE-DS2E&quot;
+## [1] &quot;Time: 2024-11-07 11:59:31\nCurrent working directory: C:/Users/pierre/Documents/GitHub/M1-R-DS2E-SE&quot;
 
 cat(infos) 
-## Time: 2024-10-28 10:26:00
-## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-SE-DS2E</code></pre>
+## Time: 2024-11-07 11:59:31
+## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-DS2E-SE</code></pre>
 </div>
 </div>
 <p>Here is some information on the computer where this document was created:</p>
@@ -548,12 +548,12 @@ Current working directory: %s&#39;,
 }
 
 get_infos()
-## Time: 2024-10-28 10:26:00
-## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-SE-DS2E
+## Time: 2024-11-07 11:59:31
+## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-DS2E-SE
 
 get_infos_2()
-## Time: 2024-10-28 10:26:00 
-## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-SE-DS2E</code></pre>
+## Time: 2024-11-07 11:59:31 
+## Current working directory: C:/Users/pierre/Documents/GitHub/M1-R-DS2E-SE</code></pre>
 </div>
 </div>
 </div>
