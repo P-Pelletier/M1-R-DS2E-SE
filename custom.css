@@ -1,0 +1,30 @@
+/* Custom styling for RMarkdown headings */
+
+/* Title */
+h1 {
+  color: #000043; /* Dark red color for title */
+  font-weight: bold; /* Bold title */
+  text-align: center; /* Center title */
+  margin-bottom: 2em; /* Add extra space after the title */
+}
+
+/* Subtitle */
+h2 {
+  color: #000043; /* Dark red color for subtitle */
+  font-weight: bold; /* Bold subtitle */
+  margin-bottom: 2em; /* Add extra space after subtitle */
+}
+
+/* Sub-subtitle */
+h3 {
+  color: #000043; /* Dark red color for sub-subtitle */
+  font-weight: bold; /* Bold sub-subtitle */
+  margin-bottom: 2em; /* Add extra space after sub-subtitle */
+}
+
+/* Further headings */
+h4, h5, h6 {
+  color: #000043; /* Dark red color for other headings */
+  font-weight: bold; /* Bold other headings */
+  margin-bottom: 2em; /* Add extra space after other headings */
+}

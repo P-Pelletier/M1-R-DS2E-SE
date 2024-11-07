@@ -1,0 +1,293 @@
+---
+title: "Best Practices"
+---
+
+<style>
+div.python pre { background-color: #e9f7f5
+; }
+</style>
+
+<style>
+div.r pre { background-color: #f8f8ff; }
+</style>
+
+
+
+# Rmarkdown
+
+Rmarkdown allows you to generate html, pdf and even word files. You can easily integrate R as Python and make your analyses in the document in order to communicate your code or their outputs (e.g. automate a report).
+
+Unlike latex and html markdown is very easy to read in its raw state. The layout, titles, tables etc... are very easy to handle and do not hinder readability.
+
+Before going deeper into details, see how to easily create an html or a pdf (or others) with Rmarkdown using R studio: 
+
+\centering
+
+## Create a new Rmarkdown document
+
+![](examples/img_md/md_1.png)
+
+- Fill name and title
+
+![](examples/img_md/md_2.JPG)
+
+- It automaticcaly creates a report example
+
+
+![](examples/img_md/md_3.JPG)
+
+- Modify the file structure, see how you can put both r and python code in your report
+
+
+![](examples/img_md/md_4.JPG)
+
+- To create the html document clic on 'knit', you can choose html or pdf as outputs (and others).
+
+
+![](examples/img_md/md_5.JPG)
+
+- See the results in html 
+
+![](examples/img_md/md_6.JPG)
+
+- in PDF 
+
+![](examples/img_md/md_7.JPG)
+
+
+## Rmarkdown structure
+
+Check this cheatsheet: https://rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf
+
+### YAML Header
+
+The header of a Rmarkdown file is by default structured as follow :
+
+```
+---
+title: "My Title"
+author: "Name"
+date: "10/02/2021"
+output: html_document
+---
+```
+
+- You can remove some if you don't want the date to be in the document for example. You can also specify more details to custom the output. For example you may want to add the table of contents at the begining of your document, the YALM will be then :
+```
+---
+title: "My Title"
+author: "Name"
+date: "10/02/2021"
+output:
+  html_document:
+    toc: true
+    number_sections: true
+---
+```
+
+- You can add an abstract to your document directly in the YAML header :
+
+
+
+```
+---
+author: "Name"
+abstract: "Abstract"
+output:
+  pdf_document:
+    toc: true
+    number_sections: true
+---
+```
+
+- You can change the theme of your html output choosing in this list : https://bootswatch.com/3/ For example, the theme of this website is Flatly.
+
+
+```
+---
+output:
+  html_document:
+    theme: flatly
+---
+```
+
+- More information here for html document: https://bookdown.org/yihui/rmarkdown/html-document.html
+
+
+
+
+### Text
+
+ - To create a title in markdown you need to use a ```#``` each ``#`` represents a title level. ```##``` returns a level two title.
+ 
+ - To create a new paragraph just end a line with two spaces. Otherwise you can skip a line to start a new paragraph but there will be a space between the two paragraphs.
+ 
+ - To write in italics or bold you only have to specify one ```*``` or two ```**``` respectively.
+ 
+ - Escaped character (remember it from chap 3 ;) ) must be specified with a \\ before. ```\*``` give \*
+ 
+ - To write example of code without running it like this ```import numpy as np``` just use ```` ```import numpy as np``` ````
+ 
+ - Show image from your computer in the output ```![title](path/to/img.jpg)```
+ 
+ - You can write directly in html, for example add a link to an external webpage : ```<a href="https://www.google.com/">Google</a>```
+ 
+ - You can write in $\LaTeX$: $\frac{1}{2}$ . You just need to write the equation between two ```$```
+ 
+ - To make bulletpoints like this:
+     - here 
+         - and here, please use * then + then - for different levels. Also just using - and four whitespaces for each level works also.
+ 
+### Code chunks
+
+- By default the first chunk is about chunk options. It is presented like this :
+
+```
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+- You can set there chunk option for all you document, you can specify if we will see the code, the output, warnings, errors etc etc. Please see all options on the cheatsheet.
+
+- As you noted a chunk start with ```` ```{} ````. First you specify the language used within the chunk and then the title of the chunk, after the comma, specify options for the given chunk :  
+```` ```{r chunk1, error = T} ````
+
+
+### Slides
+
+- You can create slides directly with Rmarkdown also , ioslide and slidy will be used to create html slides, which are cool if you want to put interactive stuff in your slides, otherwise beamer can be used for static presentation in pdf
+
+![](examples/img_md/md_8.JPG)
+
+
+- To create a new slide just type ```---``` between two empty lines or create a new title.
+
+
+![](examples/img_md/md_9.JPG)
+
+![](examples/img_md/md_10.JPG)
+
+## Execute rmd automatically
+
+- From R :
+
+```rmarkdown::render('C:/Users/Beta/Documents/GitHub/M1_TDP/examples/Markdown/test.Rmd', 'pdf_document')``` 
+
+- From Shell:
+
+```R -e "rmarkdown::render('C:/Users/Beta/Documents/GitHub/M1_TDP/examples/Markdown/test.Rmd', 'pdf_document')"```
+
+- From Python :
+
+<div class = "python">
+
+```{python, eval = F}
+import os 
+os.system('''R -e "rmarkdown::render('C:/Users/Beta/Documents/GitHub/M1_TDP/examples/Markdown/test.Rmd', 'pdf_document')" ''')
+```
+
+</div>
+
+# GitHub
+
+Github is a company that creates products that use the open source tool git.
+From wikipedia: "Git is a distributed version-control system for tracking changes in any set of files, originally designed for coordinating work among programmers cooperating on source code during software development.".
+
+
+## Create a repository
+
+A repository is usually used to organize a single project. Repositories can contain folders and files, images, videos, spreadsheets, and data sets etc, etc.
+
+- On your GitHub account create a new repository:
+
+
+![](examples/img_gh/gh_1.JPG)
+
+- Name the project, Add a README, gitignore is used to ignore some files format that are stored in the same folder on your computer. 
+
+
+![](examples/img_gh/gh_2.JPG)
+
+
+- Now that you have a repository, you may want to invite people to collaborate with you and give them writing rights to the project. Conversely, these collaborators can also clone the project and then ask to attach their versions to yours afterwards. 
+
+
+![](examples/img_gh/gh_3.JPG)
+
+- Invite a collaborator 
+
+![](examples/img_gh/gh_5.JPG)
+
+## Clone a repository
+
+- If you are not the creator of the repository, you can clone the repository to have it on your computer and then modify the project. In the same way you can easily use other people's programs by cloning their repository.
+
+![](examples/img_gh/gh_6.JPG)
+
+![](examples/img_gh/gh_7.JPG)
+
+
+
+## Create branches
+
+- Now that the directory is created, collaborators can work on it and contribute to the project. The final version of the project can be found on the 'main' branch.
+
+- You can create a branch in order to start editing the project and save your changes on your own branch. Often branches will be linked to specific aspects of the project and will then be removed once the changes have been integrated into the final version.
+
+
+![](examples/img_gh/gh_8.JPG)
+
+- You can publish this branch if you want it to be merged to the main branch after your changes.
+
+![](examples/img_gh/gh_9.JPG)
+
+## Commit your changes
+
+
+![](examples/img_gh/gh_11.JPG)
+
+- Once you have finished your changes for the day but you are still not at the stage where your branch has to be merged with the main branch you can push your commits to save them and make them available to the other one (still on your branch).
+
+
+![](examples/img_gh/gh_12.JPG)
+
+- On github you can see the project as well as the two branches that compose it
+
+![](examples/img_gh/gh_13.JPG)
+
+![](examples/img_gh/gh_14.JPG)
+
+## Create Pull Request
+
+- Once your changes are complete you can now submit your changes to the community and create a pull request. 
+
+![](examples/img_gh/gh_14.JPG)
+
+- This will signal to others that your changes are ready and that adding them to the final project needs to be discussed. You can also check the changes approved by the main branch before merging them.
+
+![](examples/img_gh/gh_15.JPG)
+
+![](examples/img_gh/gh_16.JPG)
+
+- Then the authors of the repository will be able to approve or not the merge of the two branches. As I'm a collaborator of the project I can do it by myself. 
+
+![](examples/img_gh/gh_17.JPG)
+
+![](examples/img_gh/gh_22.JPG)
+
+![](examples/img_gh/gh_23.JPG)
+
+- Once the modifications are validated, you can delete the branch that was created for the occasion.
+
+![](examples/img_gh/gh_19.JPG)
+
+- So we only have one branch left in our repository with the modifications made on the solutions folder.
+
+![](examples/img_gh/gh_20.JPG)
+
+- Keeping your folder update
+
+- If you are working on different aspects of your project you probably want to integrate into your computer folder the changes made by your collaborators, so you should regularly check if any changes have been made to a given branch and pull origin if necessary. Make sure you check the changes made to the files before doing it!
+
+
+![](examples/img_gh/gh_21.JPG)
+

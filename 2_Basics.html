@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Basics</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">M1 DS2E/SE - R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="2_Basics.html">Basics</a>
+</li>
+<li>
+  <a href="3_Arrays_Vectors.html">Arrays/Vectors</a>
+</li>
+<li>
+  <a href="4_Regex.html">Regex</a>
+</li>
+<li>
+  <a href="5_Data_Analysis_R.html">Data Analysis</a>
+</li>
+<li>
+  <a href="7_Best_practices.html">Best Pratices</a>
+</li>
+<li>
+  <a href="8_Efficient_prog.html">Efficient Prog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/master-ds2e/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Basics</h1>
+
+</div>
+
+
+<style>
+div.python pre { background-color: #e9f7f5
+; }
+</style>
+<style>
+div.r pre { background-color: #f8f8ff; }
+</style>
+<style>
+div.exo pre { background-color: #e3e9ea; }
+</style>
+<p>
+ 
+</p>
+<p>This chapter introduces the basics of R, focusing on the different types of objects that can be used, as well as control flow and function writing. The chapter concludes with three exercises from the Euler Project. Students are encouraged to work in pairs.</p>
+<p>
+ 
+</p>
+<div id="rpython" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> R/Python</h1>
+<p>Data science languages such as R and Python are highly effective for business analysis and machine learning. Both languages offer a wide range of tools and libraries for data wrangling, preprocessing, and machine learning, making them ideal for reproducible research. Additionally, the ability to combine languages can open up new possibilities for even more advanced analysis. Despite their similarities, each language also has its own unique features and strengths, making it worth considering both options when choosing a language for a specific project.</p>
+<div id="r-strengths" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> R Strengths</h2>
+<p>The R programming language has its origins in the S language, which was developed by statistician John Chambers at Bell Labs in 1976. The R language was later developed at the University of Auckland, New Zealand, to expand upon the capabilities of S. Both S and R were created by researchers for the purpose of more efficiently conducting research and communicating results.</p>
+<p>R is a powerful language for statistics, data analysis, data exploration, and data visualization. It is equipped with tools for reporting and communication, such as RMarkdown and Shiny.</p>
+<p>In recent years, R has seen significant growth with the emergence of the tidyverse (tidyverse.org), a collection of tools with a common programming interface that use functional verbs to perform intuitive operations, connected by the pipe operator. The tidyverse is particularly advantageous as it makes data mining more efficient and allows for easy iteration through exploratory analysis. The interface is designed in a way that it makes it easy to write a paragraph describing the steps that you intend to take with the data.</p>
+<ul>
+<li><p>Exploration is done using R for its readability and efficiency in the tidyverse and datatable.</p></li>
+<li><p>R is used for communication because of the advanced reporting utilities such as RMarkdown, Shiny, and ggplot2 for visualization.</p></li>
+<li><p>R’s CRAN repository offers a vast range of specialized packages for statistics, econometrics, biostatistics, epidemiology, and social science research.</p></li>
+<li><p>R integrates seamlessly with R Markdown and knitr for producing reproducible research reports that combine data analysis, code, and narrative text into a single document.</p></li>
+</ul>
+</div>
+</div>
+<div id="operations" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Operations</h1>
+<div id="arithmetic-operations" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Arithmetic Operations</h2>
+<p>R work as classical calculator, using “+”, “-”, “*” and “/” we can do arithmetic operations in both languages.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+1+2
+## [1] 3
+1-2
+## [1] -1
+1/2
+## [1] 0.5
+1*2
+## [1] 2</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>We can also apply exponentiation, Modulo and floor division easily in both language.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+2**8 # exponentiation
+## [1] 256
+2^8 == 2**8 # TRUE
+## [1] TRUE
+8%%3 # modulo
+## [1] 2
+8%/%3 # floor division
+## [1] 2</code></pre>
+</div>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th>Operator (R)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>Addition</td>
+</tr>
+<tr class="even">
+<td>–</td>
+<td>Subtraction</td>
+</tr>
+<tr class="odd">
+<td>*</td>
+<td>Multiplication</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>Division</td>
+</tr>
+<tr class="odd">
+<td>^ / **</td>
+<td>Exponent</td>
+</tr>
+<tr class="even">
+<td>%%</td>
+<td>Modulo</td>
+</tr>
+<tr class="odd">
+<td>%/%</td>
+<td>Floor Division</td>
+</tr>
+</tbody>
+</table>
+<p>
+ 
+</p>
+</div>
+<div id="comparison-operators" class="section level2" number="2.2">
+<h2><span class="header-section-number">2.2</span> Comparison Operators</h2>
+<p>To compare values, we use comparison operators to determine if a value is equal to, not equal to, greater than, etc.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+2==8
+## [1] FALSE
+2!=8
+## [1] TRUE
+2&lt;8
+## [1] TRUE
+2&gt;8
+## [1] FALSE
+2&lt;=8
+## [1] TRUE</code></pre>
+</div>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th>Operator (R)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&lt;</td>
+<td>Less than</td>
+</tr>
+<tr class="even">
+<td>&gt;</td>
+<td>Greater than</td>
+</tr>
+<tr class="odd">
+<td>&lt;=</td>
+<td>Less than or equal to</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>Greater than or equal to</td>
+</tr>
+<tr class="odd">
+<td>==</td>
+<td>Equal to</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>Not equal to</td>
+</tr>
+</tbody>
+</table>
+<p>
+ 
+</p>
+</div>
+<div id="logical-operators" class="section level2" number="2.3">
+<h2><span class="header-section-number">2.3</span> Logical operators</h2>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+x = c(TRUE,TRUE)
+y = c(TRUE,FALSE)
+
+!x[1]
+## [1] FALSE
+x &amp; y
+## [1]  TRUE FALSE
+x &amp;&amp; y
+## [1] TRUE
+x | y
+## [1] TRUE TRUE
+x || y
+## [1] TRUE</code></pre>
+</div>
+</div>
+<table>
+<thead>
+<tr class="header">
+<th>Operator (R)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>!</td>
+<td>Logical NOT</td>
+</tr>
+<tr class="even">
+<td>&amp;</td>
+<td>Element-wise logical AND</td>
+</tr>
+<tr class="odd">
+<td>&amp;&amp;</td>
+<td>Logical AND</td>
+</tr>
+<tr class="even">
+<td>|</td>
+<td>Element-wise logical OR</td>
+</tr>
+<tr class="odd">
+<td>||</td>
+<td>Logical OR</td>
+</tr>
+</tbody>
+</table>
+<p>
+ 
+</p>
+</div>
+<div id="membership-operators" class="section level2" number="2.4">
+<h2><span class="header-section-number">2.4</span> Membership operators</h2>
+<p>In R, the equivalent membership testing operator is ‘%in%’, which checks if a particular value exists within a vector or list. Unlike Python, R does not decompose strings into individual characters when using this operator. Instead, ‘%in%’ checks for an exact match between elements. For example, using ‘%in%’ in R would not recognize ‘Hello’ as part of ‘Hello world’ unless ‘Hello world’ is an exact element within the vector or list being tested.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+x = &#39;Hello World&#39;
+
+print(&#39;Hello&#39; %in% x)
+## [1] FALSE
+stringr::str_detect(x,&#39;Hello&#39;)
+## [1] TRUE</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+x = c(&#39;Hello&#39;,&#39;World&#39;)
+
+print(&#39;Hello&#39; %in% x)
+## [1] TRUE
+stringr::str_detect(&#39;Hello&#39;,x)
+## [1]  TRUE FALSE</code></pre>
+</div>
+</div>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise:</strong></p>
+<ul>
+<li>Verify if a number is divisible by 5.</li>
+<li>Is the number ‘58’ present in the string ‘ak2vf6dGdS8wShiz9S56a5hd58f8Se’?</li>
+<li>Check both of these conditions simultaneously</li>
+</ul>
+</div>
+<p>
+ 
+</p>
+</div>
+</div>
+<div id="objects-variables" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Objects &amp; Variables</h1>
+<p>R does not require declaring a variable before assigning a value to it. Variables can be thought of as names that refer to an object. However, there is a difference in the way objects and variables are stored in the computer’s memory in R compared to Python.</p>
+<div id="textual-and-numerical-variables" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Textual and numerical variables</h2>
+<p>In R, textual data is referred to as ‘character’. You can use either ” or ’ when defining a textual variable, and it’s possible to explicitly set a variable as a textual variable if needed.</p>
+<p>Numerical variables in R are divided into three types. The equivalent of a float in Python is called ‘double’, referring to double-precision floating point, which means that the number has a precision of up to 15 decimal places.</p>
+<p>Finally, it’s easy to check the data type of a variable by using the command <code>typeof</code> in R.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+a = 1
+typeof(a)
+## [1] &quot;double&quot;
+a_int = 1L
+typeof(a_int)
+## [1] &quot;integer&quot;
+
+b = 1.1
+typeof(b)
+## [1] &quot;double&quot;
+
+c = 1.1+2i
+typeof(c)
+## [1] &quot;complex&quot;
+
+d = &#39;d&#39;
+typeof(d)
+## [1] &quot;character&quot;
+
+# change the type
+e = 2
+f = as.character(e)
+f
+## [1] &quot;2&quot;
+as.numeric(f)
+## [1] 2</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+</div>
+<div id="other-data-type" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> Other Data-Type</h2>
+<p>There are many data types in both languages that will be covered throughout this course, for now, we will focus only on basic data types that are available without using any additional packages or libraries. In R, common data types include Vector, Matrix, List, and Dataframe.</p>
+<p>
+ 
+</p>
+<div id="vectors-and-matrices" class="section level3" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Vectors and Matrices</h3>
+<div class = "r">
+
+<div class="row">
+<pre class="r"><code># R
+
+vec = c(1, 2, 3)
+length(which(vec==2)) # count elements of the list which are exactly equal to 2
+## [1] 1
+
+vec = sort(vec,
+           decreasing = TRUE)
+vec
+## [1] 3 2 1
+# access the element of a list
+vec[1]
+## [1] 3
+vec[which(vec==3)]
+## [1] 3
+vec[2:length(vec)]
+## [1] 2 1
+vec[length(vec):2]
+## [1] 1 2
+vec[-1] # throwaway value
+## [1] 2 1</code></pre>
+</div>
+<div class="row">
+<pre class="r"><code># R
+
+mat = matrix(c(1, 2, 3, 4, 5, 6),3,2)
+dim(mat)
+## [1] 3 2
+mat
+##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+
+length(which(mat==2)) # count elements of the list which are exactly equal to 2
+## [1] 1
+
+vec = sort(mat,
+           decreasing = TRUE)
+vec
+## [1] 6 5 4 3 2 1
+# access the element of a list
+mat[1] # first element
+## [1] 1
+which(mat==3,
+      arr.ind = TRUE) # get row and columns for each value that match
+##      row col
+## [1,]   3   1
+
+mat[2:length(mat)] # gives us a vector
+## [1] 2 3 4 5 6
+mat[2:dim(mat)[1],]
+##      [,1] [,2]
+## [1,]    2    5
+## [2,]    3    6
+mat[length(mat):1]
+## [1] 6 5 4 3 2 1
+
+mat[1,-1] # throwaway values
+## [1] 4</code></pre>
+</div>
+<div class="row">
+<pre class="r"><code># modify
+
+b = rep(0,3)
+vec = c(vec,b)
+vec
+## [1] 6 5 4 3 2 1 0 0 0
+mat_2 = rbind(vec,vec)
+mat_2 
+##     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+## vec    6    5    4    3    2    1    0    0    0
+## vec    6    5    4    3    2    1    0    0    0
+mat_2 = cbind(mat_2,mat_2)
+mat_2
+##     [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10] [,11] [,12] [,13] [,14]
+## vec    6    5    4    3    2    1    0    0    0     6     5     4     3     2
+## vec    6    5    4    3    2    1    0    0    0     6     5     4     3     2
+##     [,15] [,16] [,17] [,18]
+## vec     1     0     0     0
+## vec     1     0     0     0
+
+t_mat = t(mat) # transposition
+t_mat[2,3] = as.character(t_mat[2,3]) # all values turn to character
+
+
+i_mat = diag(1, 3)
+i_mat
+##      [,1] [,2] [,3]
+## [1,]    1    0    0
+## [2,]    0    1    0
+## [3,]    0    0    1</code></pre>
+</div>
+<p>
+ 
+</p>
+</div>
+<div id="data-frame" class="section level3" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Data frame</h3>
+<p>A Data frame in R is a matrix that can store different types of data such as characters, numeric or factors. Unlike a matrix, it does not have a fixed dimension, which means that we can easily create a new column using the operator ‘$’.</p>
+<div class="r">
+<div class="row">
+<pre class="r"><code># R
+
+df = data.frame(chr = letters[1:5], # letters is a vector of letter provided directly in R
+                num = seq(1,5,1),
+                fac = factor(c(rep(&#39;a&#39;,3),rep(&#39;b&#39;,2)))) 
+class(df$chr) # automatically converted to factor, which can be very inefficient ! UP: Not any more with R &gt;= 4.0 !
+## [1] &quot;character&quot;
+df$chr = as.character(df$chr)
+class(df$chr)
+## [1] &quot;character&quot;
+colnames(df)
+## [1] &quot;chr&quot; &quot;num&quot; &quot;fac&quot;
+df
+##   chr num fac
+## 1   a   1   a
+## 2   b   2   a
+## 3   c   3   a
+## 4   d   4   b
+## 5   e   5   b
+# access the element of a variable in a df
+df$chr[3]
+## [1] &quot;c&quot;
+which(df==3,
+      arr.ind = TRUE) 
+##      row col
+## [1,]   3   2
+
+df[1:2] # gives us a df with the first two columns !
+##   chr num
+## 1   a   1
+## 2   b   2
+## 3   c   3
+## 4   d   4
+## 5   e   5
+df[3:dim(df)[1],]
+##   chr num fac
+## 3   c   3   a
+## 4   d   4   b
+## 5   e   5   b
+
+df[1,-1] # throwaway values
+##   num fac
+## 1   1   a</code></pre>
+<pre class="r"><code># modify
+
+b = rep(0,3)
+df = rbind(df,b) # introduce a new row in the data frame, note that we get a NA in the factor column because &#39;0&#39; is not a level
+## Warning in `[&lt;-.factor`(`*tmp*`, ri, value = 0): niveau de facteur incorrect,
+## NAs générés
+df$new_col = rep(2,6) # we can introduce new columns by specifying the name and set a value
+
+
+df
+##   chr num  fac new_col
+## 1   a   1    a       2
+## 2   b   2    a       2
+## 3   c   3    a       2
+## 4   d   4    b       2
+## 5   e   5    b       2
+## 6   0   0 &lt;NA&gt;       2
+t_df = t(df) # transposition convert the df into a matrix
+class(t_df)
+## [1] &quot;matrix&quot; &quot;array&quot;</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise:</strong></p>
+<ul>
+<li>Create a dataframe with a column ‘a’ ranging from 1 to 10, and a column ‘b’ equal to 5.</li>
+<li>In a third column, check which elements of column ‘a’ are divisible by 5.</li>
+</ul>
+</div>
+<p>
+ 
+</p>
+</div>
+<div id="arrays" class="section level3" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Arrays</h3>
+<p>Arrays is a generalization of the matrix, meaning that we can have a matrix with more than two dimensions. We can modify them as we modify a matrix.</p>
+<div class="r">
+<div class="row">
+<pre class="r"><code># R
+
+arr = array(seq(1,12,1), dim = c(2,2,3)) # create a matrix with 3 dimension
+arr
+## , , 1
+## 
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]    5    7
+## [2,]    6    8
+## 
+## , , 3
+## 
+##      [,1] [,2]
+## [1,]    9   11
+## [2,]   10   12
+# access the element of a dictionary
+arr[1,,]
+##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    3    7   11
+arr[,1,]
+##      [,1] [,2] [,3]
+## [1,]    1    5    9
+## [2,]    2    6   10
+arr[,,1]
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+</div>
+<div id="lists" class="section level3" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Lists</h3>
+<p>A list permits us to assemble an assortment of disconnected objects behind one object, it is also possible to store objects which can be of different types.</p>
+<div class="r">
+<div class="row">
+<pre class="r"><code># R
+
+lst = list(df = df,
+           mat = mat,
+           arr = arr) # create a matrix with 3 dimension
+
+lst
+## $df
+##   chr num  fac new_col
+## 1   a   1    a       2
+## 2   b   2    a       2
+## 3   c   3    a       2
+## 4   d   4    b       2
+## 5   e   5    b       2
+## 6   0   0 &lt;NA&gt;       2
+## 
+## $mat
+##      [,1] [,2]
+## [1,]    1    4
+## [2,]    2    5
+## [3,]    3    6
+## 
+## $arr
+## , , 1
+## 
+##      [,1] [,2]
+## [1,]    1    3
+## [2,]    2    4
+## 
+## , , 2
+## 
+##      [,1] [,2]
+## [1,]    5    7
+## [2,]    6    8
+## 
+## , , 3
+## 
+##      [,1] [,2]
+## [1,]    9   11
+## [2,]   10   12
+lst[[1]] # first element of the list, here it is the df
+##   chr num  fac new_col
+## 1   a   1    a       2
+## 2   b   2    a       2
+## 3   c   3    a       2
+## 4   d   4    b       2
+## 5   e   5    b       2
+## 6   0   0 &lt;NA&gt;       2
+lst[[1]][1,] # first row of first element of the list
+##   chr num fac new_col
+## 1   a   1   a       2</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+</div>
+</div>
+</div>
+<div id="control-flow" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Control flow</h1>
+<p>In programming, there are two main control flow tools: conditional statements and loops.</p>
+<p>Conditional statements, also known as choices, are useful for establishing rules or conditions. They allow for modifying a value according to a certain condition, and generally allow for certain actions to be taken in specific cases.</p>
+<p>Loops, on the other hand, allow for sequential execution of actions. They can be used to interactively modify an object, and generally allow for a procedure to be executed multiple times. For example, we can use loops to create multiple similar objects, or to modify multiple lines in a single object.</p>
+<div id="choices" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Choices</h2>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+
+# if, elif, else
+
+n = 12L
+
+if(n%%2 == 0){  
+  print(&#39;n is an even number&#39;)
+}
+## [1] &quot;n is an even number&quot;
+  
+
+
+
+if(!is.integer(n)){ 
+  print(&#39;n is not a integer&#39;)
+  } else if(n%%2 == 0){
+    print(&#39;n is an even number&#39;)
+    } else {
+      print(&#39;n is not an even number&#39;)
+      }
+## [1] &quot;n is an even number&quot;</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise:</strong></p>
+<ul>
+<li>Write a condition that returns “there is an ‘e’” if there is an ‘e’ in a given word, and “there is no ‘e’” otherwise.</li>
+</ul>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+</div>
+<div id="loops" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Loops</h2>
+<p>With ‘loops’, we iterate over a predefined number of iterations. However, in certain situations we may not know in advance how many iterations are required to complete a task.</p>
+<p>For example, when trying to optimize a function, we may not know how many steps are needed to reach an optimum, but we can set a condition for when the algorithm is considered to have converged. In such cases, we can use a ‘while’ loop, which will iterate until a given condition is met.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+seq = c(1,2,NA,4,NA,6)
+total = 0
+
+for(val in seq){
+  if(!is.na(val)){
+    total = total + val
+  }
+}
+    
+total
+## [1] 13</code></pre>
+<pre class="r"><code># R
+
+total = 0
+
+while(total &lt; 1){
+  rnd = rnorm(n=1, mean = 0, sd = 1)
+  if(rnd &lt; 0){
+    # in R we can specify nothing instead of specifying &#39;pass&#39;
+    } else {
+    total = total + rnd }
+}
+  
+total
+## [1] 1.161672</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise:</strong></p>
+<ul>
+<li>Write a for loop for ‘i’ from 1 to 100 that prints the number ‘i’ if it is divisible by 12.</li>
+<li>Write a while loop that returns ‘No’ as long as a randomly chosen number between 0 and 1 is not greater than 0.5.</li>
+</ul>
+</div>
+<p>
+ 
+</p>
+</div>
+<div id="some-differences-between-r-and-python" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Some differences between R and Python</h2>
+<div id="r" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> R</h3>
+<ul>
+<li>R’s functionalities are developed by statisticians, giving it specific advantages in certain fields.</li>
+<li>In R, a variable and an object are the same thing; they refer to the same entities. If we assign a new variable to a variable that already exists, it will refer to two different objects.</li>
+<li>We should generally avoid using <code>for</code> loops in R as they are very slow because they execute a function call with every iteration.</li>
+<li>Instead of <code>for</code> loops, we should use vectorization and the <code>apply</code> family of functions for better performance. Vectorization is crucial for fast code in R.</li>
+<li>If data exceeds the limit of memory, R may not be the best choice for performance.</li>
+</ul>
+</div>
+<div id="python" class="section level3" number="4.3.2">
+<h3><span class="header-section-number">4.3.2</span> Python</h3>
+<ul>
+<li>Python is widely appreciated for being a versatile language with an easy-to-understand syntax.</li>
+<li>In Python, variables refer to an object, but they are still two separate entities. This means that two variables can refer to a single object. If two variables point to the same object, any modifications made using one variable will also be reflected when using the other variable.</li>
+<li>Python also benefits from vectorization for speed, and if other factors are equal, vectorized Python code should perform similarly to vectorized R code.</li>
+</ul>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+only_nb &lt;- c(1,2,3,4)
+sd(only_nb)
+## [1] 1.290994
+with_na &lt;- c(1,2,3,NA)
+sd(with_na)
+## [1] NA
+with_char &lt;- c(1,2,&#39;3&#39;,4)
+sd(with_char)
+## [1] 1.290994
+
+with_char &lt;- c(1,2,&#39;a&#39;,4)
+sd(with_char)
+## Warning in var(if (is.vector(x) || is.factor(x)) x else as.double(x), na.rm =
+## na.rm): NAs introduits lors de la conversion automatique
+## [1] NA</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<ul>
+<li><p>When computing a standard deviation in R, it does not show an error for missing values (NA) and returns NA. It also attempts to convert strings to numeric values if possible. If this is not possible, R will return a NA. This is not an error message, but a warning message. It’s important to be careful when writing code as R can continue calculations and return NA without stopping the process.</p></li>
+<li><p>R calculates the standard deviation with N-1 as the denominator, while numpy uses N. To obtain the same results when using R, we need to use ‘ddof=1’ as an argument in the std function.</p></li>
+</ul>
+<p>
+ 
+</p>
+</div>
+</div>
+</div>
+<div id="functions" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Functions</h1>
+<p>Functions are an important aspect of R. Being able to write our own functions can be more efficient than searching for and understanding a pre-existing package.</p>
+<p>Writing our own functions gives us more flexibility and a better understanding of what we are doing. However, it is important to not reinvent the wheel and instead use pre-existing packages when appropriate. It is crucial to carefully read the documentation when using packages, as they can be misleading and lead to a lot of time spent trying to understand how they work. It is also beneficial to look at the package’s source code when unsure of what a function does behind the scenes.</p>
+<p>The full power of programming comes from the ability to be autonomous by reading, modifying, and writing code, as well as reusing pre-existing code.</p>
+<p>
+ 
+</p>
+<div id="general-functions" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> General Functions</h2>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+seq = rep(c(1,2,NA,4,NA,6),120)
+
+
+clean_sum &lt;- function(seq){
+  total = 0
+  for(val in seq){
+    if(!is.na(val)){
+      total = total + val
+    }
+  }
+  return(total)
+}
+
+t = Sys.time()
+clean_sum(seq = seq)
+## [1] 1560
+Sys.time() - t
+## Time difference of 0.01950002 secs
+
+
+
+clean_sum2 &lt;- function(seq){
+  total &lt;- sum(na.rm(seq))
+  return(total)
+}
+
+t &lt;- Sys.time()
+clean_sum(seq = seq)
+## [1] 1560
+Sys.time() - t
+## Time difference of 0.003983974 secs</code></pre>
+</div>
+</div>
+<p>In R, it is not possible to unpack the output of a function into multiple variables directly. However, this functionality can be achieved using the <code>zeallot</code> package.</p>
+<div class="row">
+<div class="r">
+<pre class="r"><code># R
+library(zeallot)
+## Warning: le package &#39;zeallot&#39; a été compilé avec la version R 4.1.3
+
+add_two &lt;- function(nb){
+  nb = nb + 2
+  return(nb)
+}
+  
+square_nb &lt;- function(nb){
+  nb = nb**2
+  return(nb)
+}
+
+global_function &lt;- function(nb){
+  for(func in func_list){
+    nb = func(nb)
+      }
+  return(nb)
+}
+
+func_list = c(add_two,square_nb)
+
+c(x1, x2) %&lt;-% global_function(c(2,3))
+x1
+## [1] 16
+x2
+## [1] 25</code></pre>
+</div>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+</div>
+</div>
+<div id="exercises" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Exercises</h1>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 1:</strong></p>
+<p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
+<p>Find the sum of all the multiples of 3 or 5 below 10000.</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 2:</strong></p>
+<p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
+<p>What is the 10 001st prime number?</p>
+</div>
+<p>
+ 
+</p>
+<p>
+ 
+</p>
+<div style="border:1px solid; padding:10px; margin-bottom:10px; border-radius: 10px; background-color: #f9f9f9;">
+<p><strong>Exercise 3:</strong></p>
+<p>You are given the following information, but you may prefer to do some research for yourself.</p>
+<ul>
+<li>1 Jan 1900 was a Monday.</li>
+<li>Thirty days has September, April, June and November. All the rest have thirty-one, Saving February alone, Which has twenty-eight, rain or shine. And on leap years, twenty-nine.</li>
+<li>A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.</li>
+</ul>
+<p>How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
+</div>
+<p>
+ 
+</p>
+<p><a href="">Possible solutions in R without vectorisation</a> <!-- exo_chap_1.html --></p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
