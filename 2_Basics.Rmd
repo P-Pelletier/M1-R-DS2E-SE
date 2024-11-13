@@ -572,50 +572,6 @@ total
 
 <p>&nbsp;</p>
 
-## Some differences between R and Python
-
-### R
-
-- R's functionalities are developed by statisticians, giving it specific advantages in certain fields.
-- In R, a variable and an object are the same thing; they refer to the same entities. If we assign a new variable to a variable that already exists, it will refer to two different objects.
-- We should generally avoid using `for` loops in R as they are very slow because they execute a function call with every iteration.
-- Instead of `for` loops, we should use vectorization and the `apply` family of functions for better performance. Vectorization is crucial for fast code in R.
-- If data exceeds the limit of memory, R may not be the best choice for performance.
-
-### Python
-
-- Python is widely appreciated for being a versatile language with an easy-to-understand syntax.
-- In Python, variables refer to an object, but they are still two separate entities. This means that two variables can refer to a single object. If two variables point to the same object, any modifications made using one variable will also be reflected when using the other variable.
-- Python also benefits from vectorization for speed, and if other factors are equal, vectorized Python code should perform similarly to vectorized R code.
-
-
-
-<div class = "row">
-<div class = "r">
-```{r r-ov,echo=T,collapse = TRUE}
-# R
-only_nb <- c(1,2,3,4)
-sd(only_nb)
-with_na <- c(1,2,3,NA)
-sd(with_na)
-with_char <- c(1,2,'3',4)
-sd(with_char)
-
-with_char <- c(1,2,'a',4)
-sd(with_char)
-
-```
-</div>
-</div>
-
-<p>&nbsp;</p>
-
-- When computing a standard deviation in R, it does not show an error for missing values (NA) and returns NA. It also attempts to convert strings to numeric values if possible. If this is not possible, R will return a NA. This is not an error message, but a warning message. It's important to be careful when writing code as R can continue calculations and return NA without stopping the process.
-
-- R calculates the standard deviation with N-1 as the denominator, while numpy uses N. To obtain the same results when using R, we need to use 'ddof=1' as an argument in the std function.
-
-
-
 <p>&nbsp;</p>
 # Functions
 

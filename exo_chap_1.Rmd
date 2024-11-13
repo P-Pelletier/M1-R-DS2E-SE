@@ -32,7 +32,6 @@ If we list all the natural numbers below 10 that are multiples of 3 or 5, we get
 Find the sum of all the multiples of 3 or 5 below 10000.
 
 
-## R 
 
 <div class = "r">
 
@@ -64,7 +63,6 @@ By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that 
 
 What is the 10 001st prime number?
 
-## R 
 
 <div class = "r">
 
@@ -98,8 +96,7 @@ Sys.time() - t
 ```
 </div>
 
-
-# Exercie 3
+# Exerice 3
 
 You are given the following information, but you may prefer to do some research for yourself.
 
@@ -113,8 +110,6 @@ You are given the following information, but you may prefer to do some research 
 - A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.
 
 How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?
-
-## R
 
 <div class = "r">
 
@@ -166,7 +161,6 @@ nb_sundays
 ``` 
 
 </div>
-
 
 
 <a href="2_Basics.html"> Go back to chapter 1</a>

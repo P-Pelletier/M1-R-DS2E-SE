@@ -381,8 +381,6 @@ div.r pre { background-color: #f8f8ff; }
 <h1><span class="header-section-number">1</span> Exercice 1</h1>
 <p>If we list all the natural numbers below 10 that are multiples of 3 or 5, we get 3, 5, 6 and 9. The sum of these multiples is 23.</p>
 <p>Find the sum of all the multiples of 3 or 5 below 10000.</p>
-<div id="r" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> R</h2>
 <div class="r">
 <pre class="r"><code># R
 
@@ -400,16 +398,13 @@ t &lt;- Sys.time()
 get_sum_multiples_below1(10000,3,5)
 ## [1] 23331668
 Sys.time() - t
-## Time difference of 0.02389693 secs</code></pre>
-</div>
+## Time difference of 0.01792407 secs</code></pre>
 </div>
 </div>
 <div id="exercice-2" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Exercice 2</h1>
 <p>By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.</p>
 <p>What is the 10 001st prime number?</p>
-<div id="r-1" class="section level2" number="2.1">
-<h2><span class="header-section-number">2.1</span> R</h2>
 <div class="r">
 <pre class="r"><code># R
 
@@ -437,12 +432,11 @@ t &lt;- Sys.time()
 nth_prime(10001)
 ## [1] 104743
 Sys.time() - t
-## Time difference of 2.664546 secs</code></pre>
+## Time difference of 1.437482 secs</code></pre>
 </div>
 </div>
-</div>
-<div id="exercie-3" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Exercie 3</h1>
+<div id="exerice-3" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Exerice 3</h1>
 <p>You are given the following information, but you may prefer to do some research for yourself.</p>
 <ul>
 <li>1 Jan 1900 was a Monday.</li>
@@ -450,8 +444,6 @@ Sys.time() - t
 <li>A leap year occurs on any year evenly divisible by 4, but not on a century unless it is divisible by 400.</li>
 </ul>
 <p>How many Sundays fell on the first of the month during the twentieth century (1 Jan 1901 to 31 Dec 2000)?</p>
-<div id="r-2" class="section level2" number="3.1">
-<h2><span class="header-section-number">3.1</span> R</h2>
 <div class="r">
 <pre class="r"><code>
 get_sundays &lt;- function(year,first_sunday){
@@ -493,7 +485,7 @@ for(i in seq(1901,2000)){
   nb_sundays = nb_sundays + year_result[2]
 }
 Sys.time() - t
-## Time difference of 0.02887297 secs
+## Time difference of 0.02446008 secs
 
 
 # results
@@ -501,7 +493,6 @@ nb_sundays
 ## [1] 171</code></pre>
 </div>
 <p><a href="2_Basics.html"> Go back to chapter 1</a></p>
-</div>
 </div>
 
 

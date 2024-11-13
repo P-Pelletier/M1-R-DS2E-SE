@@ -1064,7 +1064,7 @@ while(total &lt; 1){
 }
   
 total
-## [1] 1.376559</code></pre>
+## [1] 2.627035</code></pre>
 </div>
 </div>
 <p>
@@ -1083,57 +1083,9 @@ total
 <p>
  
 </p>
-</div>
-<div id="some-differences-between-r-and-python" class="section level2" number="4.3">
-<h2><span class="header-section-number">4.3</span> Some differences between R and Python</h2>
-<div id="r" class="section level3" number="4.3.1">
-<h3><span class="header-section-number">4.3.1</span> R</h3>
-<ul>
-<li>R’s functionalities are developed by statisticians, giving it specific advantages in certain fields.</li>
-<li>In R, a variable and an object are the same thing; they refer to the same entities. If we assign a new variable to a variable that already exists, it will refer to two different objects.</li>
-<li>We should generally avoid using <code>for</code> loops in R as they are very slow because they execute a function call with every iteration.</li>
-<li>Instead of <code>for</code> loops, we should use vectorization and the <code>apply</code> family of functions for better performance. Vectorization is crucial for fast code in R.</li>
-<li>If data exceeds the limit of memory, R may not be the best choice for performance.</li>
-</ul>
-</div>
-<div id="python" class="section level3" number="4.3.2">
-<h3><span class="header-section-number">4.3.2</span> Python</h3>
-<ul>
-<li>Python is widely appreciated for being a versatile language with an easy-to-understand syntax.</li>
-<li>In Python, variables refer to an object, but they are still two separate entities. This means that two variables can refer to a single object. If two variables point to the same object, any modifications made using one variable will also be reflected when using the other variable.</li>
-<li>Python also benefits from vectorization for speed, and if other factors are equal, vectorized Python code should perform similarly to vectorized R code.</li>
-</ul>
-<div class="row">
-<div class="r">
-<pre class="r"><code># R
-only_nb &lt;- c(1,2,3,4)
-sd(only_nb)
-## [1] 1.290994
-with_na &lt;- c(1,2,3,NA)
-sd(with_na)
-## [1] NA
-with_char &lt;- c(1,2,&#39;3&#39;,4)
-sd(with_char)
-## [1] 1.290994
-
-with_char &lt;- c(1,2,&#39;a&#39;,4)
-sd(with_char)
-## Warning in var(if (is.vector(x) || is.factor(x)) x else as.double(x), na.rm =
-## na.rm): NAs introduits lors de la conversion automatique
-## [1] NA</code></pre>
-</div>
-</div>
 <p>
  
 </p>
-<ul>
-<li><p>When computing a standard deviation in R, it does not show an error for missing values (NA) and returns NA. It also attempts to convert strings to numeric values if possible. If this is not possible, R will return a NA. This is not an error message, but a warning message. It’s important to be careful when writing code as R can continue calculations and return NA without stopping the process.</p></li>
-<li><p>R calculates the standard deviation with N-1 as the denominator, while numpy uses N. To obtain the same results when using R, we need to use ‘ddof=1’ as an argument in the std function.</p></li>
-</ul>
-<p>
- 
-</p>
-</div>
 </div>
 </div>
 <div id="functions" class="section level1" number="5">
@@ -1166,7 +1118,7 @@ t = Sys.time()
 clean_sum(seq = seq)
 ## [1] 1560
 Sys.time() - t
-## Time difference of 0.008960009 secs
+## Time difference of 0.004981995 secs
 
 
 
@@ -1179,7 +1131,7 @@ t &lt;- Sys.time()
 clean_sum(seq = seq)
 ## [1] 1560
 Sys.time() - t
-## Time difference of 0.001991987 secs</code></pre>
+## Time difference of 0.002036095 secs</code></pre>
 </div>
 </div>
 <p>In R, it is not possible to unpack the output of a function into multiple variables directly. However, this functionality can be achieved using the <code>zeallot</code> package.</p>
