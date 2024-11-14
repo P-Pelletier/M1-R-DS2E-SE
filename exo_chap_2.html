@@ -412,7 +412,7 @@ t = Sys.time()
 sum_n_power_last_digit(1000,10)
 ##  [1] &quot;9&quot; &quot;1&quot; &quot;1&quot; &quot;0&quot; &quot;8&quot; &quot;4&quot; &quot;6&quot; &quot;7&quot; &quot;0&quot; &quot;0&quot;
 Sys.time() - t
-## Time difference of 0.01797891 secs</code></pre>
+## Time difference of 0.01991415 secs</code></pre>
 </div>
 </div>
 <div id="python" class="section level2" number="1.2">
@@ -444,7 +444,7 @@ t = time.time()
 sum_n_power_last_digit(1000,10)
 ## &#39;9110846700&#39;
 time.time() - t
-## 0.016443252563476562</code></pre>
+## 0.01792120933532715</code></pre>
 </div>
 </div>
 </div>
@@ -471,7 +471,7 @@ t &lt;- Sys.time()
 get_sum_multiples_below1(1000000,3,5)
 ## [1] 233333166668
 Sys.time() - t
-## Time difference of 1.070431 secs
+## Time difference of 1.063538 secs
 
 
 
@@ -485,7 +485,7 @@ t &lt;- Sys.time()
 get_sum_multiples_below2(1000000,3,5)
 ## [1] 233333166668
 Sys.time() - t
-## Time difference of 3.69473 secs
+## Time difference of 3.717938 secs
 
 
 
@@ -499,7 +499,7 @@ t &lt;- Sys.time()
 get_sum_multiples_below3(1000000,3,5)
 ## [1] 233333166668
 Sys.time() - t
-## Time difference of 0.06024218 secs</code></pre>
+## Time difference of 0.05240107 secs</code></pre>
 </div>
 </div>
 <div id="python-1" class="section level3" number="2.1.2">
@@ -521,7 +521,7 @@ get_sum_multiples_below1(1000000,3,5)
 ## 233333166668
 time.time() - t
 
-## 0.12900590896606445
+## 0.12664246559143066
 def get_sum_multiples_below2(below,mutiple_1,multiple_2):
   multiples = [i if ((i % mutiple_1 == 0) or (i % multiple_2 == 0)) else 0 for i in range(below)]
   return sum(multiples)
@@ -531,7 +531,7 @@ get_sum_multiples_below2(1000000,3,5)
 ## 233333166668
 time.time() - t
 
-## 0.275374174118042
+## 0.19032979011535645
 def get_sum_multiples_below3(below,mutiple_1,multiple_2):
   seq = list(range(below))
   multiples = map(lambda i: i if ((i % mutiple_1 == 0) or (i % multiple_2 == 0)) else 0, seq) 
@@ -542,7 +542,7 @@ get_sum_multiples_below3(1000000,3,5)
 ## 233333166668
 time.time() - t
 
-## 0.2565124034881592
+## 0.22023749351501465
 def get_sum_multiples_below4(below,mutiple_1,multiple_2):
   seq = np.arange(below)
   seq = seq[((seq % mutiple_1 == 0) | (seq % multiple_2 == 0))]
@@ -554,7 +554,7 @@ get_sum_multiples_below4(1000000,3,5)
 ## 
 ## &lt;string&gt;:4: RuntimeWarning: overflow encountered in scalar add
 time.time() - t
-## 0.060739755630493164</code></pre>
+## 0.057375192642211914</code></pre>
 </div>
 </div>
 </div>
@@ -593,7 +593,7 @@ t &lt;- Sys.time()
 nth_prime(10001)
 ## [1] 104743
 Sys.time() - t
-## Time difference of 2.614014 secs
+## Time difference of 2.34991 secs
 
 
 nth_prime2 &lt;- function(nth){
@@ -614,7 +614,7 @@ t &lt;- Sys.time()
 nth_prime2(10001)
 ## [1] 104743
 Sys.time() - t
-## Time difference of 2.103099 secs</code></pre>
+## Time difference of 2.182637 secs</code></pre>
 </div>
 </div>
 <div id="python-2" class="section level3" number="2.2.2">
@@ -646,7 +646,7 @@ nth_prime(10001)
 ## 104743
 time.time() - t
 
-## 0.38547778129577637
+## 0.3798048496246338
 def nth_prime2(nth):
   primes = [2,3]
   i = 3
@@ -664,7 +664,7 @@ t = time.time()
 nth_prime2(10001)
 ## 104743
 time.time() - t
-## 0.8535525798797607</code></pre>
+## 0.8157591819763184</code></pre>
 </div>
 </div>
 </div>
@@ -699,12 +699,12 @@ t = Sys.time()
 smalles_multiple(10)
 ## [1] 2520
 Sys.time() - t
-## Time difference of 0.02441287 secs
+## Time difference of 0.02493691 secs
 
 t = Sys.time()
 #smalles_multiple(20)
 Sys.time() - t
-## Time difference of 0.001991034 secs
+## Time difference of 0.001039028 secs
 
 
 
@@ -733,14 +733,14 @@ t = Sys.time()
 smalles_multiple(10)
 ## [1] 2520
 Sys.time() - t
-## Time difference of 0.02687812 secs
+## Time difference of 0.0294981 secs
 
 
 t = Sys.time()
 smalles_multiple(20)
 ## [1] 232792560
 Sys.time() - t
-## Time difference of 0.820641 secs</code></pre>
+## Time difference of 1.527849 secs</code></pre>
 </div>
 </div>
 <div id="python-3" class="section level2" number="3.2">
@@ -766,12 +766,12 @@ t = time.time()
 smalles_multiple(10)
 ## 2520
 time.time() - t
-## 0.01593327522277832
+## 0.014936208724975586
 t = time.time()
 #smalles_multiple(20)
 time.time() - t
 
-## 0.002987384796142578
+## 0.001991748809814453
 def smalles_multiple(n):
   dividers_all = np.arange(1,n+1)
   multiple = 1
@@ -795,13 +795,13 @@ smalles_multiple(10)
 ## 2520
 time.time() - t
 
-## 0.015937089920043945
+## 0.014931917190551758
 t = time.time()
 smalles_multiple(20)
 ## 232792560
 time.time() - t
 
-## 0.40686464309692383</code></pre>
+## 0.38979125022888184</code></pre>
 </div>
 </div>
 </div>
@@ -843,7 +843,7 @@ print(max(palindromes))
 ## 906609
 time.time() - t
 
-## 0.6134848594665527</code></pre>
+## 0.5844340324401855</code></pre>
 </div>
 <p><a href="3_Arrays_Vectors.html"> Go back to chapter 2</a></p>
 </div>

@@ -408,7 +408,7 @@ library(tictoc)
 tic()
 sum_x = X+X
 toc()
-## 0.58 sec elapsed
+## 0.86 sec elapsed
 
 tic()
 sum_sparse_x = sparse_X+sparse_X
@@ -452,7 +452,7 @@ for(i in 1:500){
   coefs[i,] = lm_bs()
 }
 toc()
-## 26.25 sec elapsed</code></pre>
+## 26.51 sec elapsed</code></pre>
 <ul>
 <li>Check how many cores you can use</li>
 </ul>
@@ -567,31 +567,31 @@ results &lt;- lapply(list_,FUN = calc_try)</code></pre>
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.04280996 secs</code></pre>
+<pre><code>## Time difference of 0.041816 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 1.208496 secs</code></pre>
+<pre><code>## Time difference of 1.235315 secs</code></pre>
 <pre class="r"><code># compare it 
 list_ = create_dirty_list(0.33)
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.03385186 secs</code></pre>
+<pre><code>## Time difference of 0.03436589 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 1.641031 secs</code></pre>
+<pre><code>## Time difference of 0.8827832 secs</code></pre>
 <pre class="r"><code># compare it 
 list_ = create_dirty_list(0.75)
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.01948595 secs</code></pre>
+<pre><code>## Time difference of 0.01891708 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.4024889 secs</code></pre>
+<pre><code>## Time difference of 0.4304268 secs</code></pre>
 </div>
 </div>
 </div>

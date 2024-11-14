@@ -725,5 +725,5 @@ How many Sundays fell on the first of the month during the twentieth century (1 
 
 <p>&nbsp;</p>
 
-<a href="">Possible solutions in R without vectorisation</a> 
-<!-- exo_chap_1.html -->
+<a href="exo_chap_1.html">Possible solutions in R without vectorisation</a> 
+<!--  -->
