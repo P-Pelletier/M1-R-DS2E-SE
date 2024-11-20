@@ -636,6 +636,6 @@ Find the largest palindrome made from the product of two 3-digit numbers.
 <p>&nbsp;</p>
 
 
-<a href="">Solutions</a> 
-<!-- exo_chap_2.html -->
+<a href="exo_chap_2.html">Solutions</a> 
+<!--  -->
 

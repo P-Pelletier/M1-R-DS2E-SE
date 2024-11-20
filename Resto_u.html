@@ -1,0 +1,2846 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>resto_u</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="custom.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">M1 DS2E/SE - R</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="2_Basics.html">Basics</a>
+</li>
+<li>
+  <a href="3_Arrays_Vectors.html">Arrays/Vectors</a>
+</li>
+<li>
+  <a href="4_Regex.html">Regex</a>
+</li>
+<li>
+  <a href="5_Data_Analysis_R.html">Data Analysis</a>
+</li>
+<li>
+  <a href="7_Best_practices.html">Best Pratices</a>
+</li>
+<li>
+  <a href="8_Efficient_prog.html">Efficient Prog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/master-ds2e/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">resto_u</h1>
+
+</div>
+
+
+<style>
+div.python pre { background-color: #e9f7f5
+; }
+</style>
+<style>
+div.r pre { background-color: #fff6f6; }
+</style>
+<div id="set-up-user-agent" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> Set up user-agent</h1>
+<pre class="r"><code>library(httr)</code></pre>
+<pre><code>## 
+## Attachement du package : &#39;httr&#39;</code></pre>
+<pre><code>## L&#39;objet suivant est masqué depuis &#39;package:plotly&#39;:
+## 
+##     config</code></pre>
+<pre class="r"><code>library(stringr)
+library(xml2)
+library(stringr)
+library(tools)
+
+
+res = GET(&#39;https://www.whatismybrowser.com/detect/what-is-my-user-agent/&#39;)
+str_match_all(content(res, &quot;text&quot;), &#39;&lt;div class=&quot;value&quot; id=&quot;detected_value&quot;&gt;(.*?)&lt;/div&gt;&#39;)[[1]][,2]</code></pre>
+<pre><code>## [1] &quot;libcurl/7.64.1 r-curl/4.3.2 httr/1.4.2&quot;</code></pre>
+<pre class="r"><code>user_agent = user_agent(&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0&quot;)
+res = GET(&#39;https://www.whatismybrowser.com/detect/what-is-my-user-agent/&#39;, user_agent)
+str_match_all(content(res, &quot;text&quot;), &#39;&lt;div class=&quot;value&quot; id=&quot;detected_value&quot;&gt;(.*?)&lt;/div&gt;&#39;)[[1]][,2]</code></pre>
+<pre><code>## [1] &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0&quot;</code></pre>
+<ul>
+<li>Select one page as an example, here we use esplanade’s restaurant</li>
+</ul>
+<pre class="r"><code>urlpage = &#39;https://www.crous-strasbourg.fr/restaurant/resto-u-esplanade-2/&#39;
+urlpage</code></pre>
+<pre><code>## [1] &quot;https://www.crous-strasbourg.fr/restaurant/resto-u-esplanade-2/&quot;</code></pre>
+<ul>
+<li><p>Get the html content using requests with your own user_agent header</p></li>
+<li><p>parse the html</p></li>
+</ul>
+<pre class="r"><code>res = GET(urlpage, user_agent)
+html = xml2::read_html(httr::content(res, &quot;text&quot;))
+substr(as.character(html), 1, 2000)</code></pre>
+<pre><code>## [1] &quot;&lt;!DOCTYPE html&gt;\n&lt;html lang=\&quot;fr-FR\&quot; prefix=\&quot;og: https://ogp.me/ns#\&quot;&gt;\n&lt;head&gt;\n&lt;meta http-equiv=\&quot;Content-Type\&quot; content=\&quot;text/html; charset=UTF-8\&quot;&gt;\n&lt;meta charset=\&quot;utf-8\&quot;&gt;\n&lt;title&gt;Resto U&#39; Esplanade - Crous de Strasbourg&lt;/title&gt;\n&lt;meta name=\&quot;viewport\&quot; content=\&quot;width=device-width, initial-scale=1.0,user-scalable=yes,minimal-ui\&quot;&gt;\n&lt;!-- Optimisation des moteurs de recherche par Rank Math PRO - https://rankmath.com/ --&gt;&lt;meta name=\&quot;robots\&quot; content=\&quot;follow, index, max-snippet:-1, max-video-preview:-1, max-image-preview:large\&quot;&gt;\n&lt;link rel=\&quot;canonical\&quot; href=\&quot;https://www.crous-strasbourg.fr/restaurant/resto-u-esplanade-2/\&quot;&gt;\n&lt;meta property=\&quot;og:locale\&quot; content=\&quot;fr_FR\&quot;&gt;\n&lt;meta property=\&quot;og:type\&quot; content=\&quot;article\&quot;&gt;\n&lt;meta property=\&quot;og:title\&quot; content=\&quot;Resto U&#39; Esplanade - Crous de Strasbourg\&quot;&gt;\n&lt;meta property=\&quot;og:url\&quot; content=\&quot;https://www.crous-strasbourg.fr/restaurant/resto-u-esplanade-2/\&quot;&gt;\n&lt;meta property=\&quot;og:site_name\&quot; content=\&quot;Lyon\&quot;&gt;\n&lt;meta property=\&quot;og:image\&quot; content=\&quot;https://www.crous-strasbourg.fr/wp-content/uploads/sites/29/2022/11/Logo.jpg\&quot;&gt;\n&lt;meta property=\&quot;og:image:secure_url\&quot; content=\&quot;https://www.crous-strasbourg.fr/wp-content/uploads/sites/29/2022/11/Logo.jpg\&quot;&gt;\n&lt;meta property=\&quot;og:image:width\&quot; content=\&quot;1200\&quot;&gt;\n&lt;meta property=\&quot;og:image:height\&quot; content=\&quot;630\&quot;&gt;\n&lt;meta property=\&quot;og:image:alt\&quot; content=\&quot;Resto U’ Esplanade\&quot;&gt;\n&lt;meta property=\&quot;og:image:type\&quot; content=\&quot;image/jpeg\&quot;&gt;\n&lt;meta name=\&quot;twitter:card\&quot; content=\&quot;summary_large_image\&quot;&gt;\n&lt;meta name=\&quot;twitter:title\&quot; content=\&quot;Resto U&#39; Esplanade - Crous de Strasbourg\&quot;&gt;\n&lt;meta name=\&quot;twitter:image\&quot; content=\&quot;https://www.crous-strasbourg.fr/wp-content/uploads/sites/29/2022/11/Logo.jpg\&quot;&gt;\n&lt;!-- /Extension Rank Math WordPress SEO --&gt;&lt;link rel=\&quot;dns-prefetch\&quot; href=\&quot;//cdn.jsdelivr.net\&quot;&gt;\n&lt;link rel=\&quot;dns-prefetch\&quot; href=\&quot;//unpkg.com\&quot;&gt;\n&lt;link href=\&quot;https://fonts.gstatic.com\&quot; crossorigin rel=\&quot;preconnect\&quot;&gt;\n&lt;link rel=\&quot;stylesheet\&quot; id=\&quot;tec-tickets-seating-frontend-style-css\&quot; href=\&quot;https://www.crous-strasbourg.fr/wp-content/plugins/event-tickets/build/Seating/frontend/ticketsB&quot;</code></pre>
+<pre class="r"><code>clean_html = str_replace_all(as.character(html),&#39;[\\t\\r\\n\\f]&#39;,&#39;&#39;)</code></pre>
+<ul>
+<li><p>Find out how we can get the information needed: with a right click, inspect the webpage in your navigator. See that <code>'menu'</code> seems to be a good option to get meals in a structured way.</p></li>
+<li><p><code>'menu'</code> is the html class and <code>'div'</code>is the element: <code>&lt;div class="menu"&gt;</code></p></li>
+</ul>
+<pre class="r"><code>menus = str_match_all(clean_html,  &#39;&lt;div class=&quot;menu&quot;&gt;(.*?)&lt;/ul&gt;&lt;/div&gt; *&lt;/div&gt;&#39;)[[1]][,2]
+menus</code></pre>
+<pre><code>## [1] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du mercredi 20 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Curry de légumes maison BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de lentilles BIO&lt;/li&gt;&lt;li&gt;Haricots BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au chocolat BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                       
+## [2] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du jeudi 21 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Viennoise, sauce tomate&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Colombo de porc maison&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce à la volaille maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Flan litchis framboises&lt;/li&gt;&lt;li&gt;Beignet au chocolat et noisettes&lt;/li&gt;&lt;li&gt;Tarte aux pommes et à la rhubarbe&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Colombo de porc maison&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Echine de porc aux cacahuètes maison&lt;/li&gt;&lt;li&gt;Riz cantonnais&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes, sauce au miel&lt;/li&gt;&lt;li&gt;Riz cantonnais&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan litchis framboises&lt;/li&gt;&lt;li&gt;Beignet au chocolat et noisettes&lt;/li&gt;&lt;li&gt;Tarte aux pommes et à la rhubarbe&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                     
+## [3] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du vendredi 22 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Saucisse de volaille, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Fricadelle de boeuf, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce arrabiata maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Blondie aux framboises&lt;/li&gt;&lt;li&gt;Cocktail de fruits exotiques&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Fricadelle de boeuf, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Cuisse de poulet à l&#39;américaine maison&lt;/li&gt;&lt;li&gt;Trio de légumes&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche au fromage&lt;/li&gt;&lt;li&gt;Trio de légumes&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Blondie aux framboises&lt;/li&gt;&lt;li&gt;Cocktail de fruits exotiques&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;
+## [4] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du lundi 25 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Saucisse de Toulouse, jus corsé au thym&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Fish and chips, sauce rémoulade&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce bolognaise maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Paris-Brest&lt;/li&gt;&lt;li&gt;Tarte au citron&lt;/li&gt;&lt;li&gt;Compote de pommes aux spéculoos&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Fish and chips, sauce rémoulade&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Cordon bleu, sauce crème aux champignons&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;Purée de pommes de terre&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Coudes gratinés&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Paris-Brest&lt;/li&gt;&lt;li&gt;Tarte au citron&lt;/li&gt;&lt;li&gt;Compote de pommes aux spéculoos&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                         
+## [5] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du mardi 26 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Viennoise, sauce tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Palette à la diable&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Clafoutis aux poires et pépites de chocolat&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;li&gt;Mini donut&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Palette à la diable&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Filet de poulet, sauce crème&lt;/li&gt;&lt;li&gt;Haricots beurre&lt;/li&gt;&lt;li&gt;Blé safrané&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Dahl crémeux de pois cassés&lt;/li&gt;&lt;li&gt;Blé safrané&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Clafoutis aux poires et pépites de chocolat&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;li&gt;Mini donut&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                   
+## [6] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du mercredi 27 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Poutine maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Chili aux légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Nouilles chinoises maison&lt;/li&gt;&lt;li&gt;Wok de légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Tarte normande&lt;/li&gt;&lt;li&gt;Millefeuille&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Chili aux légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Galette de tofu BIO, sauce tomate&lt;/li&gt;&lt;li&gt;Gratin de chou-fleur&lt;/li&gt;&lt;li&gt;Pommes de terre BIO maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Omelette au fromage&lt;/li&gt;&lt;li&gt;Gratin de chou-fleur&lt;/li&gt;&lt;li&gt;Pommes de terre BIO maison&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au caramel BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                              
+## [7] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du jeudi 28 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Merguez, sauce tomate&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Paëlla maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce arrabiata maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Beignet au chocolat&lt;/li&gt;&lt;li&gt;Tarte coco&lt;/li&gt;&lt;li&gt;Fromage blanc crème de marrons et vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Paëlla maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Boulettes d&#39;agneau&lt;/li&gt;&lt;li&gt;Légumes couscous&lt;/li&gt;&lt;li&gt;Semoule&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Tajine de pois chiches, abricots et amandes maison&lt;/li&gt;&lt;li&gt;Semoule&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Beignet au chocolat&lt;/li&gt;&lt;li&gt;Tarte coco&lt;/li&gt;&lt;li&gt;Fromage blanc, crème de marrons et vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                  
+## [8] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du vendredi 29 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pilons de poulet, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Cordon bleu, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Pommes de terre wedges&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce carbonara maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Flan chocolat et noisettes&lt;/li&gt;&lt;li&gt;Eclair au café&lt;/li&gt;&lt;li&gt;Tarte aux poires&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Cordon bleu, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Pommes de terre wedges&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Farfalles bolognaises&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux poireaux&lt;/li&gt;&lt;li&gt;Farfalles&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan chocolat et noisettes&lt;/li&gt;&lt;li&gt;Eclair au café&lt;/li&gt;&lt;li&gt;Tarte aux poires&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;</code></pre>
+<ul>
+<li>Let’s first create a function to get the webpage, the arguments to get a flexible function could be url of the page</li>
+</ul>
+<pre class="r"><code>get_page = function(urlpage,user_agent){
+  res = GET(urlpage, user_agent)
+  html = read_html(content(res, &quot;text&quot;))
+  clean_html = str_replace_all(as.character(html),&#39;[\\t\\r\\n\\f]&#39;,&#39;&#39;)
+  return(clean_html)
+}
+
+user_agent = user_agent(&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0&quot;)
+urlpage = &#39;https://www.crous-strasbourg.fr/restaurant/resto-u-esplanade-2/&#39;
+clean_html = get_page(urlpage = urlpage, user_agent = user_agent)
+
+
+menus = str_match_all(clean_html,  &#39;&lt;div class=&quot;menu&quot;&gt;(.*?)&lt;/ul&gt;&lt;/div&gt; *&lt;/div&gt;&#39;)[[1]][,2]
+menus[1]</code></pre>
+<pre><code>## [1] &quot;                &lt;div class=\&quot;menu_date\&quot;&gt;                    &lt;div class=\&quot;prev\&quot;&gt;&lt;/div&gt;                    &lt;time class=\&quot;menu_date_title\&quot;&gt;Menu du mercredi 20 novembre 2024&lt;/time&gt;&lt;div class=\&quot;next\&quot;&gt;&lt;/div&gt;                &lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &lt;div class=\&quot;meal\&quot;&gt;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Curry de légumes maison BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de lentilles BIO&lt;/li&gt;&lt;li&gt;Haricots BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au chocolat BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;</code></pre>
+<ul>
+<li>We want everything between <code>&lt;time class="menu_date_title"&gt;Menu du</code> and the first <code>&lt;/time&gt;</code> that appears, we can just catch the group of character between these two entities. Create a group with <code>()</code> to extract this part with <code>re.findall</code> :
+<ul>
+<li>This group can be composed of everything so specify a <code>.</code></li>
+<li>We can have 0 or more charater so put a <code>*</code>after the <code>.</code></li>
+<li>Finally the <code>?</code> will control for the repetition <code>&lt;/time&gt;</code>, so when it will meet the first <code>&lt;/time&gt;</code>, it will stop.</li>
+</ul></li>
+<li>You will then try to find if there is some stuff in your string that match this condition. The regex will be written <code>'&lt;time class="menu_date_title"&gt;Menu du (.*?)&lt;/time&gt;'</code>. Of course it doen’t mean there are no other way of doing it or even writting it, but it works and it’s pretty simple to read.</li>
+</ul>
+<pre class="r"><code>meals = str_split(menus, &#39;&lt;div class=&quot;meal&quot;&gt;&#39;)
+
+# Extraire la date
+date = str_match(meals[[1]][1], &#39;&lt;time class=&quot;menu_date_title&quot;&gt;Menu du (.*?)&lt;/time&gt;&#39;)[, 2]
+date</code></pre>
+<pre><code>## [1] &quot;mercredi 20 novembre 2024&quot;</code></pre>
+<pre class="r"><code>dates = sapply(meals,FUN = function(x){str_match(x[1], &#39;&lt;time class=&quot;menu_date_title&quot;&gt;Menu du (.*?)&lt;/time&gt;&#39;)[, 2]})
+dates</code></pre>
+<pre><code>## [1] &quot;mercredi 20 novembre 2024&quot; &quot;jeudi 21 novembre 2024&quot;   
+## [3] &quot;vendredi 22 novembre 2024&quot; &quot;lundi 25 novembre 2024&quot;   
+## [5] &quot;mardi 26 novembre 2024&quot;    &quot;mercredi 27 novembre 2024&quot;
+## [7] &quot;jeudi 28 novembre 2024&quot;    &quot;vendredi 29 novembre 2024&quot;</code></pre>
+<pre class="r"><code>clean_meals = lapply(meals,FUN = function(x){x[-1]})
+clean_meals</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Curry de légumes maison BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de lentilles BIO&lt;/li&gt;&lt;li&gt;Haricots BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au chocolat BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+## 
+## [[2]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Viennoise, sauce tomate&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Colombo de porc maison&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce à la volaille maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Flan litchis framboises&lt;/li&gt;&lt;li&gt;Beignet au chocolat et noisettes&lt;/li&gt;&lt;li&gt;Tarte aux pommes et à la rhubarbe&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Colombo de porc maison&lt;/li&gt;&lt;li&gt;Carottes&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Gratin de légumes et lentilles corail maison&lt;/li&gt;&lt;li&gt;Penne&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Echine de porc aux cacahuètes maison&lt;/li&gt;&lt;li&gt;Riz cantonnais&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes, sauce au miel&lt;/li&gt;&lt;li&gt;Riz cantonnais&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan litchis framboises&lt;/li&gt;&lt;li&gt;Beignet au chocolat et noisettes&lt;/li&gt;&lt;li&gt;Tarte aux pommes et à la rhubarbe&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## 
+## [[3]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Saucisse de volaille, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Fricadelle de boeuf, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce arrabiata maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Blondie aux framboises&lt;/li&gt;&lt;li&gt;Cocktail de fruits exotiques&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Fricadelle de boeuf, jus corsé&lt;/li&gt;&lt;li&gt;Haricots plats carottes&lt;/li&gt;&lt;li&gt;Boulgour aux épices&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux pommes de terre, poireaux et épinards maison&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Cuisse de poulet à l&#39;américaine maison&lt;/li&gt;&lt;li&gt;Trio de légumes&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche au fromage&lt;/li&gt;&lt;li&gt;Trio de légumes&lt;/li&gt;&lt;li&gt;Pommes de terre au four&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Blondie aux framboises&lt;/li&gt;&lt;li&gt;Cocktail de fruits exotiques&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+## 
+## [[4]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Saucisse de Toulouse, jus corsé au thym&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Fish and chips, sauce rémoulade&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce bolognaise maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Paris-Brest&lt;/li&gt;&lt;li&gt;Tarte au citron&lt;/li&gt;&lt;li&gt;Compote de pommes aux spéculoos&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Fish and chips, sauce rémoulade&lt;/li&gt;&lt;li&gt;Haricots verts à l&#39;ail&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Mafé aux légumes, sauce au sésame maison&lt;/li&gt;&lt;li&gt;Riz pilaf&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Cordon bleu, sauce crème aux champignons&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;Purée de pommes de terre&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Coudes gratinés&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Paris-Brest&lt;/li&gt;&lt;li&gt;Tarte au citron&lt;/li&gt;&lt;li&gt;Compote de pommes aux spéculoos&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+## 
+## [[5]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Viennoise, sauce tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Palette à la diable&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Clafoutis aux poires et pépites de chocolat&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;li&gt;Mini donut&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Palette à la diable&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de quinoa provençale, sauce tomate&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;Chou-fleur provençal&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Filet de poulet, sauce crème&lt;/li&gt;&lt;li&gt;Haricots beurre&lt;/li&gt;&lt;li&gt;Blé safrané&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Dahl crémeux de pois cassés&lt;/li&gt;&lt;li&gt;Blé safrané&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Clafoutis aux poires et pépites de chocolat&lt;/li&gt;&lt;li&gt;Eclair vanille&lt;/li&gt;&lt;li&gt;Mini donut&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+## 
+## [[6]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Poutine maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Chili aux légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Nouilles chinoises maison&lt;/li&gt;&lt;li&gt;Wok de légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Tarte normande&lt;/li&gt;&lt;li&gt;Millefeuille&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Chili aux légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Lasagnes aux épinards et ricotta maison&lt;/li&gt;&lt;li&gt;Brocolis&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Galette de tofu BIO, sauce tomate&lt;/li&gt;&lt;li&gt;Gratin de chou-fleur&lt;/li&gt;&lt;li&gt;Pommes de terre BIO maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Omelette au fromage&lt;/li&gt;&lt;li&gt;Gratin de chou-fleur&lt;/li&gt;&lt;li&gt;Pommes de terre BIO maison&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au caramel BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+## 
+## [[7]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Merguez, sauce tomate&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Paëlla maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce arrabiata maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Beignet au chocolat&lt;/li&gt;&lt;li&gt;Tarte coco&lt;/li&gt;&lt;li&gt;Fromage blanc crème de marrons et vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Paëlla maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Samoussa aux légumes&lt;/li&gt;&lt;li&gt;Julienne de légumes et coriandre&lt;/li&gt;&lt;li&gt;Boulgour&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Boulettes d&#39;agneau&lt;/li&gt;&lt;li&gt;Légumes couscous&lt;/li&gt;&lt;li&gt;Semoule&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Tajine de pois chiches, abricots et amandes maison&lt;/li&gt;&lt;li&gt;Semoule&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Beignet au chocolat&lt;/li&gt;&lt;li&gt;Tarte coco&lt;/li&gt;&lt;li&gt;Fromage blanc, crème de marrons et vanille&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+## 
+## [[8]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pilons de poulet, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Cordon bleu, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Pommes de terre wedges&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Farfalles, sauce carbonara maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Flan chocolat et noisettes&lt;/li&gt;&lt;li&gt;Eclair au café&lt;/li&gt;&lt;li&gt;Tarte aux poires&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Cordon bleu, sauce marchand de vin&lt;/li&gt;&lt;li&gt;Duo de carottes&lt;/li&gt;&lt;li&gt;Pommes de terre wedges&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Curry de légumes&lt;/li&gt;&lt;li&gt;Riz&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;Volaille origine France&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;
+## [2] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Farfalles bolognaises&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Quiche aux poireaux&lt;/li&gt;&lt;li&gt;Farfalles&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan chocolat et noisettes&lt;/li&gt;&lt;li&gt;Eclair au café&lt;/li&gt;&lt;li&gt;Tarte aux poires&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;                                            &quot;</code></pre>
+<ul>
+<li>Lets focus on one day</li>
+</ul>
+<pre class="r"><code>meal = clean_meals[[1]]
+
+meal_foodies = str_split(meal, &#39;&lt;/ul&gt;&lt;/li&gt;&#39;)
+meal_foodies</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&quot;
+## [2] &quot;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## [3] &quot;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&quot;                                                                                                                                                                                                                                                                                                                                                                                          
+## [4] &quot;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
+## [5] &quot;                                            &lt;/ul&gt;&lt;/div&gt;                                &quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+## 
+## [[2]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Dîner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 2ème étage&lt;ul&gt;&lt;li&gt;Curry de légumes maison BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de lentilles BIO&lt;/li&gt;&lt;li&gt;Haricots BIO&lt;/li&gt;&lt;li&gt;Ebly safrané BIO&lt;/li&gt;&quot;
+## [2] &quot;&lt;li&gt;Desserts 2ème étage&lt;ul&gt;&lt;li&gt;Flan au chocolat BIO&lt;/li&gt;&lt;li&gt;Tarte aux pommes BIO&lt;/li&gt;&quot;                                                                                                                                                                                                           
+## [3] &quot;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&quot;                                                                                                                                                                                                                             
+## [4] &quot;                                            &quot;</code></pre>
+<pre class="r"><code>meal_type = str_match(meal, &#39;&lt;div class=&quot;meal_title&quot;&gt;(.*?)&lt;/div&gt;&#39;)[, 2]
+meal_type</code></pre>
+<pre><code>## [1] &quot;Déjeuner&quot; &quot;Dîner&quot;</code></pre>
+<ul>
+<li>Split between the different poles</li>
+</ul>
+<pre class="r"><code>meal_foodie = meal_foodies[[1]]
+meal_foodie = meal_foodie[-length(meal_foodie)]
+meal_foodie</code></pre>
+<pre><code>## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&lt;ul&gt;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&quot;
+## [2] &quot;&lt;li&gt;Desserts 1er et 2ème étage&lt;ul&gt;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&quot;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+## [3] &quot;&lt;li&gt;Cristal Shop (RDC) Cafétéria&lt;ul&gt;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&quot;                                                                                                                                                                                                                                                                                                                                                                                          
+## [4] &quot;&lt;li&gt;Origines de nos viandes du jour&lt;ul&gt;&lt;li&gt;menu non communiqué&lt;/li&gt;&quot;</code></pre>
+<pre class="r"><code>split_parts = str_split(meal_foodie, &#39;&lt;ul&gt;&#39;)
+split_parts</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;                    &lt;div class=\&quot;meal_title\&quot;&gt;Déjeuner&lt;/div&gt;                    &lt;ul class=\&quot;meal_foodies\&quot;&gt;&lt;li&gt;Menus étudiants 1er et 2ème étage&quot;                                                                                                                                                                                                                                                                                                                                                                                                                            
+## [2] &quot;&lt;li&gt;JOURNEE VERTE&lt;/li&gt;&lt;li&gt;2ème étage :&lt;/li&gt;&lt;li&gt;Pané au fromage, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Frites&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Pancakes maison olives et féta, sauce forestière maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;1er étage :&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé à la tomate&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Penne, sauce aux 3 fromages maison&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, raïta aux herbes maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Soupe de légumes du jour :&lt;/li&gt;&lt;li&gt;Chou-fleur&lt;/li&gt;&quot;
+## 
+## [[2]]
+## [1] &quot;&lt;li&gt;Desserts 1er et 2ème étage&quot;                               
+## [2] &quot;&lt;li&gt;Donut&lt;/li&gt;&lt;li&gt;Cake nature&lt;/li&gt;&lt;li&gt;Cocktail de fruits&lt;/li&gt;&quot;
+## 
+## [[3]]
+## [1] &quot;&lt;li&gt;Cristal Shop (RDC) Cafétéria&quot;                                                                                                                                                                                                                                                                  
+## [2] &quot;&lt;li&gt;Plat à emporter en box en verre ou sur place&lt;/li&gt;&lt;li&gt;Boulettes de blé thaï, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Blé aux légumes&lt;/li&gt;&lt;li&gt;-&lt;/li&gt;&lt;li&gt;Galette de pommes de terre maison, sauce au fromage blanc maison&lt;/li&gt;&lt;li&gt;Haricots verts&lt;/li&gt;&lt;li&gt;Salade du jour&lt;/li&gt;&quot;
+## 
+## [[4]]
+## [1] &quot;&lt;li&gt;Origines de nos viandes du jour&quot; &quot;&lt;li&gt;menu non communiqué&lt;/li&gt;&quot;</code></pre>
+<ul>
+<li><p>It’s still very dirty down there, let’s clean it up!</p></li>
+<li><p>Let’s retrieve everything within <code>&lt;li&gt;&lt;/li&gt;</code> in the element of meal_foodies</p></li>
+</ul>
+<pre class="r"><code>poles = lapply(split_parts,FUN = function(split_part){str_match(split_part[1], &#39;&lt;li&gt;(.+)&#39;)[, 2]})
+poles</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;Menus étudiants 1er et 2ème étage&quot;
+## 
+## [[2]]
+## [1] &quot;Desserts 1er et 2ème étage&quot;
+## 
+## [[3]]
+## [1] &quot;Cristal Shop (RDC) Cafétéria&quot;
+## 
+## [[4]]
+## [1] &quot;Origines de nos viandes du jour&quot;</code></pre>
+<pre class="r"><code>structure_details = function(split_part){
+  details = str_match_all(split_part[-1], &#39;&lt;li&gt;(.*?)&lt;/li&gt;&#39;)[[1]][, 2]
+  return(paste(details,collapse = &quot;\\n&quot;))
+  }
+details = lapply(split_parts,FUN = structure_details)
+details</code></pre>
+<pre><code>## [[1]]
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPané au fromage, sauce forestière maison\\nHaricots verts\\nFrites\\n-\\nPancakes maison olives et féta, sauce forestière maison\\nHaricots verts\\n1er étage :\\nBoulettes de blé thaï, raïta aux herbes maison\\nHaricots verts\\nBlé à la tomate\\n-\\nPenne, sauce aux 3 fromages maison\\n-\\nGalette de pommes de terre maison, raïta aux herbes maison\\nHaricots verts\\nSoupe de légumes du jour :\\nChou-fleur&quot;
+## 
+## [[2]]
+## [1] &quot;Donut\\nCake nature\\nCocktail de fruits&quot;
+## 
+## [[3]]
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nBoulettes de blé thaï, sauce au fromage blanc maison\\nHaricots verts\\nBlé aux légumes\\n-\\nGalette de pommes de terre maison, sauce au fromage blanc maison\\nHaricots verts\\nSalade du jour&quot;
+## 
+## [[4]]
+## [1] &quot;menu non communiqué&quot;</code></pre>
+<ul>
+<li>Remove unwanted poles</li>
+</ul>
+<pre class="r"><code>idx = str_detect(poles, &quot;Origine&quot;)
+if(any(idx)){
+  poles = poles[-which(idx)]
+  details = details[-which(idx)]
+}
+
+poles_details = setNames(details,poles)
+poles_details</code></pre>
+<pre><code>## $`Menus étudiants 1er et 2ème étage`
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPané au fromage, sauce forestière maison\\nHaricots verts\\nFrites\\n-\\nPancakes maison olives et féta, sauce forestière maison\\nHaricots verts\\n1er étage :\\nBoulettes de blé thaï, raïta aux herbes maison\\nHaricots verts\\nBlé à la tomate\\n-\\nPenne, sauce aux 3 fromages maison\\n-\\nGalette de pommes de terre maison, raïta aux herbes maison\\nHaricots verts\\nSoupe de légumes du jour :\\nChou-fleur&quot;
+## 
+## $`Desserts 1er et 2ème étage`
+## [1] &quot;Donut\\nCake nature\\nCocktail de fruits&quot;
+## 
+## $`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nBoulettes de blé thaï, sauce au fromage blanc maison\\nHaricots verts\\nBlé aux légumes\\n-\\nGalette de pommes de terre maison, sauce au fromage blanc maison\\nHaricots verts\\nSalade du jour&quot;</code></pre>
+<ul>
+<li>Putting everything together:</li>
+</ul>
+<pre class="r"><code># Initialiser un dictionnaire pour les repas
+all_meals = list()
+for(i in 1:length(clean_meals)) {
+  meal = clean_meals[[i]]
+  poles_all_infos = list()
+  
+  # Séparer les différentes parties des repas
+  meal_foodies = str_split(meal, &#39;&lt;/ul&gt;&lt;/li&gt;&#39;)
+  # Identifier le type de repas (Déjeuner/Dîner)
+  meal_type = str_match(meal, &#39;&lt;div class=&quot;meal_title&quot;&gt;(.*?)&lt;/div&gt;&#39;)[, 2]
+  
+  for(j in 1:length(meal_foodies)) {
+    meal_foodie = meal_foodies[[j]]
+    meal_foodie = meal_foodie[-length(meal_foodie)]
+    
+    # Diviser entre pôle et détails
+    split_parts = str_split(meal_foodie, &#39;&lt;ul&gt;&#39;)
+    poles = lapply(split_parts,FUN = function(split_part){str_match(split_part[1], &#39;&lt;li&gt;(.+)&#39;)[, 2]})
+    details = lapply(split_parts,FUN = structure_details)
+    
+    
+    # Exclure les pôles avec &quot;Origine de nos viandes ..&quot;
+    idx = str_detect(poles, &quot;Origine&quot;)
+    if(any(idx)){
+      poles = poles[-which(idx)]
+      details = details[-which(idx)]
+    }
+    poles_details = setNames(details,poles)
+    poles_all_infos[[meal_type[[j]]]] = poles_details
+  }
+  
+  all_meals[[dates[[i]]]] = poles_all_infos
+}
+all_meals</code></pre>
+<pre><code>## $`mercredi 20 novembre 2024`
+## $`mercredi 20 novembre 2024`$Déjeuner
+## $`mercredi 20 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPané au fromage, sauce forestière maison\\nHaricots verts\\nFrites\\n-\\nPancakes maison olives et féta, sauce forestière maison\\nHaricots verts\\n1er étage :\\nBoulettes de blé thaï, raïta aux herbes maison\\nHaricots verts\\nBlé à la tomate\\n-\\nPenne, sauce aux 3 fromages maison\\n-\\nGalette de pommes de terre maison, raïta aux herbes maison\\nHaricots verts\\nSoupe de légumes du jour :\\nChou-fleur&quot;
+## 
+## $`mercredi 20 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Donut\\nCake nature\\nCocktail de fruits&quot;
+## 
+## $`mercredi 20 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nBoulettes de blé thaï, sauce au fromage blanc maison\\nHaricots verts\\nBlé aux légumes\\n-\\nGalette de pommes de terre maison, sauce au fromage blanc maison\\nHaricots verts\\nSalade du jour&quot;
+## 
+## 
+## $`mercredi 20 novembre 2024`$Dîner
+## $`mercredi 20 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Curry de légumes maison BIO\\nEbly safrané BIO\\n-\\nGalette de lentilles BIO\\nHaricots BIO\\nEbly safrané BIO&quot;
+## 
+## $`mercredi 20 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan au chocolat BIO\\nTarte aux pommes BIO&quot;
+## 
+## 
+## 
+## $`jeudi 21 novembre 2024`
+## $`jeudi 21 novembre 2024`$Déjeuner
+## $`jeudi 21 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nViennoise, sauce tomate\\nCarottes\\nFrites\\n-\\nGratin de légumes et lentilles corail maison\\nPenne\\n1er étage :\\nColombo de porc maison\\nCarottes\\nPenne\\n-\\nPenne, sauce à la volaille maison\\n-\\nGratin de légumes et lentilles corail maison\\nPenne&quot;
+## 
+## $`jeudi 21 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Flan litchis framboises\\nBeignet au chocolat et noisettes\\nTarte aux pommes et à la rhubarbe&quot;
+## 
+## $`jeudi 21 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nColombo de porc maison\\nCarottes\\nPenne\\n-\\nGratin de légumes et lentilles corail maison\\nPenne&quot;
+## 
+## 
+## $`jeudi 21 novembre 2024`$Dîner
+## $`jeudi 21 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Echine de porc aux cacahuètes maison\\nRiz cantonnais\\nPommes de terre au four\\n-\\nSamoussa aux légumes, sauce au miel\\nRiz cantonnais&quot;
+## 
+## $`jeudi 21 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan litchis framboises\\nBeignet au chocolat et noisettes\\nTarte aux pommes et à la rhubarbe&quot;
+## 
+## 
+## 
+## $`vendredi 22 novembre 2024`
+## $`vendredi 22 novembre 2024`$Déjeuner
+## $`vendredi 22 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nSaucisse de volaille, jus corsé\\nHaricots plats carottes\\nFrites\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison\\nHaricots plats carottes\\nBoulgour aux épices\\n1er étage :\\nFricadelle de boeuf, jus corsé\\nHaricots plats carottes\\nBoulgour aux épices\\n-\\nPenne, sauce arrabiata maison\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison\\nHaricots plats carottes\\nBoulgour aux épices&quot;
+## 
+## $`vendredi 22 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Blondie aux framboises\\nCocktail de fruits exotiques\\nEclair vanille&quot;
+## 
+## $`vendredi 22 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nFricadelle de boeuf, jus corsé\\nHaricots plats carottes\\nBoulgour aux épices\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison&quot;
+## 
+## 
+## $`vendredi 22 novembre 2024`$Dîner
+## $`vendredi 22 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Cuisse de poulet à l&#39;américaine maison\\nTrio de légumes\\nPommes de terre au four\\n-\\nQuiche au fromage\\nTrio de légumes\\nPommes de terre au four&quot;
+## 
+## $`vendredi 22 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Blondie aux framboises\\nCocktail de fruits exotiques\\nEclair vanille&quot;
+## 
+## 
+## 
+## $`lundi 25 novembre 2024`
+## $`lundi 25 novembre 2024`$Déjeuner
+## $`lundi 25 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nSaucisse de Toulouse, jus corsé au thym\\nHaricots verts à l&#39;ail\\nFrites\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf\\n1er étage :\\nFish and chips, sauce rémoulade\\nHaricots verts à l&#39;ail\\nRiz pilaf\\n-\\nFarfalles, sauce bolognaise maison\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf&quot;
+## 
+## $`lundi 25 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Paris-Brest\\nTarte au citron\\nCompote de pommes aux spéculoos&quot;
+## 
+## $`lundi 25 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nFish and chips, sauce rémoulade\\nHaricots verts à l&#39;ail\\nRiz pilaf\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf&quot;
+## 
+## 
+## $`lundi 25 novembre 2024`$Dîner
+## $`lundi 25 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Cordon bleu, sauce crème aux champignons\\nBrocolis\\nPurée de pommes de terre\\n-\\nCoudes gratinés\\nBrocolis&quot;
+## 
+## $`lundi 25 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Paris-Brest\\nTarte au citron\\nCompote de pommes aux spéculoos&quot;
+## 
+## 
+## 
+## $`mardi 26 novembre 2024`
+## $`mardi 26 novembre 2024`$Déjeuner
+## $`mardi 26 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nViennoise, sauce tomate\\nChou-fleur provençal\\nFrites\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal\\n1er étage :\\nPalette à la diable\\nBlé à la tomate\\nChou-fleur provençal\\n-\\nFarfalles, sauce aux 3 fromages maison\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal&quot;
+## 
+## $`mardi 26 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Clafoutis aux poires et pépites de chocolat\\nEclair vanille\\nMini donut&quot;
+## 
+## $`mardi 26 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nPalette à la diable\\nBlé à la tomate\\nChou-fleur provençal\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal&quot;
+## 
+## 
+## $`mardi 26 novembre 2024`$Dîner
+## $`mardi 26 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Filet de poulet, sauce crème\\nHaricots beurre\\nBlé safrané\\n-\\nDahl crémeux de pois cassés\\nBlé safrané&quot;
+## 
+## $`mardi 26 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Clafoutis aux poires et pépites de chocolat\\nEclair vanille\\nMini donut&quot;
+## 
+## 
+## 
+## $`mercredi 27 novembre 2024`
+## $`mercredi 27 novembre 2024`$Déjeuner
+## $`mercredi 27 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPoutine maison\\nBrocolis\\nFrites\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis\\n1er étage :\\nChili aux légumes\\nRiz\\n-\\nNouilles chinoises maison\\nWok de légumes\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis&quot;
+## 
+## $`mercredi 27 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Tarte normande\\nMillefeuille\\nCake nature&quot;
+## 
+## $`mercredi 27 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nChili aux légumes\\nRiz\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis&quot;
+## 
+## 
+## $`mercredi 27 novembre 2024`$Dîner
+## $`mercredi 27 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Galette de tofu BIO, sauce tomate\\nGratin de chou-fleur\\nPommes de terre BIO maison\\n-\\nOmelette au fromage\\nGratin de chou-fleur\\nPommes de terre BIO maison&quot;
+## 
+## $`mercredi 27 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan au caramel BIO\\nTarte aux pommes BIO&quot;
+## 
+## 
+## 
+## $`jeudi 28 novembre 2024`
+## $`jeudi 28 novembre 2024`$Déjeuner
+## $`jeudi 28 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nMerguez, sauce tomate\\nJulienne de légumes et coriandre\\nFrites\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour\\n1er étage :\\nPaëlla maison\\n-\\nFarfalles, sauce arrabiata maison\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour&quot;
+## 
+## $`jeudi 28 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Beignet au chocolat\\nTarte coco\\nFromage blanc crème de marrons et vanille&quot;
+## 
+## $`jeudi 28 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nPaëlla maison\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour&quot;
+## 
+## 
+## $`jeudi 28 novembre 2024`$Dîner
+## $`jeudi 28 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Boulettes d&#39;agneau\\nLégumes couscous\\nSemoule\\n-\\nTajine de pois chiches, abricots et amandes maison\\nSemoule&quot;
+## 
+## $`jeudi 28 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Beignet au chocolat\\nTarte coco\\nFromage blanc, crème de marrons et vanille&quot;
+## 
+## 
+## 
+## $`vendredi 29 novembre 2024`
+## $`vendredi 29 novembre 2024`$Déjeuner
+## $`vendredi 29 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nPilons de poulet, sauce marchand de vin\\nDuo de carottes\\nFrites\\n-\\nCurry de légumes\\nRiz\\n1er étage :\\nCordon bleu, sauce marchand de vin\\nDuo de carottes\\nPommes de terre wedges\\n-\\nFarfalles, sauce carbonara maison\\n-\\nCurry de légumes\\nRiz&quot;
+## 
+## $`vendredi 29 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Flan chocolat et noisettes\\nEclair au café\\nTarte aux poires&quot;
+## 
+## $`vendredi 29 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nCordon bleu, sauce marchand de vin\\nDuo de carottes\\nPommes de terre wedges\\n-\\nCurry de légumes\\nRiz&quot;
+## 
+## 
+## $`vendredi 29 novembre 2024`$Dîner
+## $`vendredi 29 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Farfalles bolognaises\\n-\\nQuiche aux poireaux\\nFarfalles&quot;
+## 
+## $`vendredi 29 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan chocolat et noisettes\\nEclair au café\\nTarte aux poires&quot;</code></pre>
+</div>
+<div id="restructure-everything-into-functions" class="section level1" number="2">
+<h1><span class="header-section-number">2</span> Restructure Everything into Functions</h1>
+<pre class="r"><code>get_page = function(urlpage,user_agent){
+  res = GET(urlpage, user_agent)
+  html = read_html(content(res, &quot;text&quot;))
+  clean_html = str_replace_all(as.character(html),&#39;[\\t\\r\\n\\f]&#39;,&#39;&#39;)
+  return(clean_html)
+}</code></pre>
+<pre class="r"><code>structure_details = function(split_part){
+  details = str_match_all(split_part[-1], &#39;&lt;li&gt;(.*?)&lt;/li&gt;&#39;)[[1]][, 2]
+  return(paste(details,collapse = &quot;\\n&quot;))
+}</code></pre>
+<pre class="r"><code>get_details = function(meal_foodie){
+    meal_foodie = meal_foodie[-length(meal_foodie)]
+    split_parts = str_split(meal_foodie, &#39;&lt;ul&gt;&#39;)
+    poles = lapply(split_parts,FUN = function(split_part){str_match(split_part[1], &#39;&lt;li&gt;(.+)&#39;)[, 2]})
+    details = lapply(split_parts,FUN = structure_details)
+    idx = str_detect(poles, &quot;Origine&quot;)
+    if(any(idx)){
+      poles = poles[-which(idx)]
+      details = details[-which(idx)]
+    }
+    poles_details = setNames(details,poles)
+    return(poles_details)
+}</code></pre>
+<pre class="r"><code>get_all_meals_for_given_date = function(meal){
+  poles_all_infos = list()
+  meal_foodies = str_split(meal, &#39;&lt;/ul&gt;&lt;/li&gt;&#39;)
+  meal_type = str_match(meal, &#39;&lt;div class=&quot;meal_title&quot;&gt;(.*?)&lt;/div&gt;&#39;)[, 2]
+  for(j in 1:length(meal_foodies)) {
+    poles_details  = get_details(meal_foodies[[j]])
+    poles_all_infos[[meal_type[[j]]]] = poles_details
+  }
+  return(poles_all_infos)
+}</code></pre>
+<pre class="r"><code>get_dates_and_meals = function(menus){
+  meals = str_split(menus, &#39;&lt;div class=&quot;meal&quot;&gt;&#39;)
+  dates = sapply(meals,FUN = function(x){str_match(x[1], &#39;&lt;time class=&quot;menu_date_title&quot;&gt;Menu du (.*?)&lt;/time&gt;&#39;)[, 2]})
+  clean_meals = lapply(meals,FUN = function(x){x[-1]})
+  dates_meals = setNames(clean_meals,dates)
+  return(dates_meals)
+}</code></pre>
+<pre class="r"><code>get_all_meals = function(clean_html){
+  menus = str_match_all(clean_html,  &#39;&lt;div class=&quot;menu&quot;&gt;(.*?)&lt;/ul&gt;&lt;/div&gt; *&lt;/div&gt;&#39;)[[1]][,2]
+  dates_meals = get_dates_and_meals(menus)
+  for(date in names(dates_meals)) {
+    poles_all_infos = get_all_meals_for_given_date(dates_meals[[date]])
+    dates_meals[[date]] = poles_all_infos
+  }
+  return(dates_meals)
+}</code></pre>
+<pre class="r"><code>get_all_links = function(user_agent){
+  clean_html = get_page(urlpage = &#39;https://www.crous-strasbourg.fr/se-restaurer/ou-manger/&#39;,
+                        user_agent = user_agent)
+  links = str_match_all(clean_html, &#39;href=&quot;(.*?)&quot;&gt;&#39;)[[1]][,2]
+  links = links[str_detect(links,&#39;/restaurant/&#39;)]
+  return(links)
+}
+
+get_resto_u_name = function(links){
+  resto_names = sapply(str_match_all(links,&#39;restaurant/(.*)/&#39;), FUN = function(x) gsub(&#39;-&#39;,&#39; &#39;,x[,2]))
+  resto_names = toTitleCase(resto_names)
+  resto_names = str_replace_all(resto_names,&#39; 2&#39;,&#39;&#39;)
+  return(resto_names)
+}</code></pre>
+</div>
+<div id="final-function" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Final Function</h1>
+<pre class="r"><code>get_all_resto_u_infos = function(user_agent){
+  Sys.sleep(5)
+  links = get_all_links(user_agent) 
+  names = get_resto_u_name(links)
+  links = setNames(links,names)
+  all_infos = list()
+  for(name in names){
+    print(name)
+    Sys.sleep(5)
+    resto_u_html = get_page(links[[name]],user_agent)
+    resto_u_all_meals = get_all_meals(resto_u_html)
+    if(length(resto_u_all_meals) &gt; 0){
+      all_infos[[name]] = resto_u_all_meals
+    }
+  }
+  return(all_infos)
+}
+
+user_agent = user_agent(&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:132.0) Gecko/20100101 Firefox/132.0&quot;)
+all_infos = get_all_resto_u_infos(user_agent)</code></pre>
+<pre><code>## [1] &quot;Cafeteria De La Fac De Droit&quot;
+## [1] &quot;Cafeteria De La Fonderie&quot;
+## [1] &quot;Cafeteria Illkirch&quot;
+## [1] &quot;Cafeteria La Misha&quot;
+## [1] &quot;Cafeteria Le Cardo&quot;
+## [1] &quot;Cafeteria Le Patio&quot;
+## [1] &quot;Cafeteria Le Pege&quot;
+## [1] &quot;Cafeteria Mini r&quot;
+## [1] &quot;Cybercafe Ru Illberg&quot;
+## [1] &quot;Fec&quot;
+## [1] &quot;Kiosque Ru Esplanade&quot;
+## [1] &quot;Lannexe&quot;
+## [1] &quot;Le 32&quot;
+## [1] &quot;Le Cristal Shop Ru Esplanade&quot;
+## [1] &quot;Le Stift&quot;
+## [1] &quot;Learning Center&quot;
+## [1] &quot;Ort Laure Weil&quot;
+## [1] &quot;Restaurant Du Centre Hospitalier Derstein&quot;
+## [1] &quot;Restaurant Du Centre Hospitalier Sainte Catherine&quot;
+## [1] &quot;Restaurant Du Lycee Blaise Pascal&quot;
+## [1] &quot;Restaurant Du Lycee Dr Eugene Koeberle&quot;
+## [1] &quot;Restaurant Du Lycee Jean Mermoz&quot;
+## [1] &quot;Resto u Cronenbourg&quot;
+## [1] &quot;Resto u De Colmar&quot;
+## [1] &quot;Resto u De Lillberg&quot;
+## [1] &quot;Resto u De Liut Mulhouse&quot;
+## [1] &quot;Resto u Esplanade&quot;
+## [1] &quot;Resto u Gallia&quot;
+## [1] &quot;Resto u Illkirch&quot;
+## [1] &quot;Resto u Paul Appell&quot;</code></pre>
+<pre class="r"><code>all_infos</code></pre>
+<pre><code>## $`Cafeteria De La Fonderie`
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Repas EPICUR GRECE :\\nMoussaka aux légumes\\nOU\\nRisotto vert aux pois et courgettes&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Maraicher\\nLe Parisien\\nThon mayo\\nLe mystère de l&#39;ouest&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 20 novembre 2024`$Déjeuner$Salade
+## [1] &quot;Bowl El Paso&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Repas EPICUR ALLEMAGNE : \\nWienerschnitzels (Escalope origine France)\\nPommes sautées\\nOU\\nSalsifis à la crème&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Franc Comtois\\nWrap chicken roll&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta thon tomate&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 21 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Athéna&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Repas EPICUR AUTRICHE:\\nHot dog Autrichien\\nWedges\\nOU\\nCurry de boulettes végétale\\nWedges&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Maraicher\\nLe Parisien\\nL&#39;Italien\\nMaxi rodele&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta pesto&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 22 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Syracuse&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Boule d&#39;agneau\\nSauce piment doux\\nPilaf de quinoa et riz\\nBrunoise à la provençale\\nOU\\nKoshari&quot;
+## 
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe thon mayo\\nWrap Chick&#39;N Roll&quot;
+## 
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta fromage&quot;
+## 
+## $`Cafeteria De La Fonderie`$`lundi 25 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Lima&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Filet de poulet à l&#39;estragon\\nGratin pommes de terre chou fleur\\nOU\\nCrumble de potiron et de courgettes&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe new bollygood\\nPavé De Vinci&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta saumon&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mardi 26 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La New César&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Tartiflette aux champignons\\nOU\\nTajine aux pois chiches abricots et amandes/Boulghour&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Maraicher\\nLe Parisien\\nMaxi seppele\\nL&#39;Indien&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta Bolognaise&quot;
+## 
+## $`Cafeteria De La Fonderie`$`mercredi 27 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Vérone&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Émincé de dinde à la crème (Origine France)\\nPurée de carottes\\nHaricots verts\\nOu\\nBourguignon de champignons\\nPurée de carottes&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Berger\\nThon mayo&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta carbonara&quot;
+## 
+## $`Cafeteria De La Fonderie`$`jeudi 28 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Alsacienne&quot;
+## 
+## 
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`$Déjeuner$`menu étudiant tarif social`
+## [1] &quot;Quenelle de brochet\\nSauce nantua\\nRiz pilaf\\nBrocolis\\nOU\\nCari réunionnais&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`$Déjeuner$Sandwich
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe Rustique\\nBagnat Lili&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`$Déjeuner$`Box de pâtes`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Cafeteria De La Fonderie`$`vendredi 29 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Louisiana&quot;
+## 
+## 
+## 
+## 
+## $`Cafeteria Le Pege`
+## $`Cafeteria Le Pege`$`mercredi 20 novembre 2024`
+## $`Cafeteria Le Pege`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Cafeteria Le Pege`$`mercredi 20 novembre 2024`$Déjeuner$`Petit-déjeuner`
+## [1] &quot;Café &amp;amp; Viennoiseries\\n7h30 -10h30&quot;
+## 
+## $`Cafeteria Le Pege`$`mercredi 20 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Omelette aux petits légumes\\nHaricot verts\\nFrites ou quinoa&quot;
+## 
+## $`Cafeteria Le Pege`$`mercredi 20 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Tartine Provençale au chèvre\\nFrites ou quinoa&quot;
+## 
+## 
+## 
+## $`Cafeteria Le Pege`$`jeudi 21 novembre 2024`
+## $`Cafeteria Le Pege`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Cafeteria Le Pege`$`jeudi 21 novembre 2024`$Déjeuner$`Petit-déjeuner`
+## [1] &quot;Café &amp;amp; Viennoiseries\\n7h30 -10h30&quot;
+## 
+## $`Cafeteria Le Pege`$`jeudi 21 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Tartiflette savoyarde \\nSalade composée&quot;
+## 
+## $`Cafeteria Le Pege`$`jeudi 21 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Tartiflette aux légumes\\nSalade composée&quot;
+## 
+## 
+## 
+## $`Cafeteria Le Pege`$`vendredi 22 novembre 2024`
+## $`Cafeteria Le Pege`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Cafeteria Le Pege`$`vendredi 22 novembre 2024`$Déjeuner$`Petit-déjeuner`
+## [1] &quot;Café &amp;amp; Viennoiseries\\n7h30 -10h30&quot;
+## 
+## $`Cafeteria Le Pege`$`vendredi 22 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Burritos au bœuf ou Fish and Chips\\nPoêlée de légumes\\nRiz pilaf ou Frites&quot;
+## 
+## $`Cafeteria Le Pege`$`vendredi 22 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Dahl crémeux de pois cassés &amp;amp; légumes\\nRiz pilaf&quot;
+## 
+## 
+## 
+## 
+## $`Cafeteria Mini r`
+## $`Cafeteria Mini r`$`mercredi 20 novembre 2024`
+## $`Cafeteria Mini r`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Cafeteria Mini r`$`mercredi 20 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Lundi 18 Novembre 2024 au Vendredi 22 Novembre 2024&quot;
+## 
+## 
+## 
+## $`Cafeteria Mini r`$`jeudi 21 novembre 2024`
+## $`Cafeteria Mini r`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Cafeteria Mini r`$`jeudi 21 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Lundi 18 Novembre 2024 au Vendredi 22 Novembre 2024&quot;
+## 
+## 
+## 
+## $`Cafeteria Mini r`$`vendredi 22 novembre 2024`
+## $`Cafeteria Mini r`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Cafeteria Mini r`$`vendredi 22 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Lundi 18 Novembre 2024 au Vendredi 22 Novembre 2024&quot;
+## 
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`
+## $`Cybercafe Ru Illberg`$`mercredi 20 novembre 2024`
+## $`Cybercafe Ru Illberg`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`mercredi 20 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nThon mayo\\nWrap chicken roll\\nChaud: Panini Bolognaise&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mercredi 20 novembre 2024`$Déjeuner$Salade
+## [1] &quot;Bowl El Paso&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mercredi 20 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 21 novembre 2024`
+## $`Cybercafe Ru Illberg`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`jeudi 21 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Franc Comtois\\nWrap chicken roll\\nChaud: Burger / Burger végé&quot;
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 21 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Athéna&quot;
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 21 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta thon tomate&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 22 novembre 2024`
+## $`Cybercafe Ru Illberg`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`vendredi 22 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nL&#39;Italien\\nMaxi rodele\\nChaud: Panini Le Vénézia&quot;
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 22 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Syracuse&quot;
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 22 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta pesto&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`lundi 25 novembre 2024`
+## $`Cybercafe Ru Illberg`$`lundi 25 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`lundi 25 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe thon mayo\\nWrap Chick&#39;N Roll\\nChaud: Croque raclette jambon&quot;
+## 
+## $`Cybercafe Ru Illberg`$`lundi 25 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Lima&quot;
+## 
+## $`Cybercafe Ru Illberg`$`lundi 25 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta fromage&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`mardi 26 novembre 2024`
+## $`Cybercafe Ru Illberg`$`mardi 26 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`mardi 26 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe new bollygood\\nPavé De Vinci\\nChaud: Burger / Burger végé&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mardi 26 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La New César&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mardi 26 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta saumon&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`mercredi 27 novembre 2024`
+## $`Cybercafe Ru Illberg`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`mercredi 27 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nMaxi seppele\\nL&#39;Indien\\nChaud: Panini chevrette&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mercredi 27 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Vérone&quot;
+## 
+## $`Cybercafe Ru Illberg`$`mercredi 27 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta Bolognaise&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 28 novembre 2024`
+## $`Cybercafe Ru Illberg`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`jeudi 28 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Berger\\nThon mayo\\nChaud: Burger/ Burger végé&quot;
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 28 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Alsacienne&quot;
+## 
+## $`Cybercafe Ru Illberg`$`jeudi 28 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Burger / Burger végé&quot;
+## 
+## 
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 29 novembre 2024`
+## $`Cybercafe Ru Illberg`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Cybercafe Ru Illberg`$`vendredi 29 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe Rustique\\nBagnat Lili\\nChaud: Panini Le Vénézia&quot;
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 29 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Louisiana&quot;
+## 
+## $`Cybercafe Ru Illberg`$`vendredi 29 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`
+## $`Kiosque Ru Esplanade`$`mercredi 20 novembre 2024`
+## $`Kiosque Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`jeudi 21 novembre 2024`
+## $`Kiosque Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`vendredi 22 novembre 2024`
+## $`Kiosque Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`lundi 25 novembre 2024`
+## $`Kiosque Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`mercredi 27 novembre 2024`
+## $`Kiosque Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`jeudi 28 novembre 2024`
+## $`Kiosque Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`vendredi 29 novembre 2024`
+## $`Kiosque Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## $`Kiosque Ru Esplanade`$`lundi 2 décembre 2024`
+## $`Kiosque Ru Esplanade`$`lundi 2 décembre 2024`$Déjeuner
+## $`Kiosque Ru Esplanade`$`lundi 2 décembre 2024`$Déjeuner$Fermeture
+## [1] &quot;Structure fermée du Mardi 22 Octobre 2024 au Samedi 31 Mai 2025&quot;
+## 
+## 
+## 
+## 
+## $Lannexe
+## $Lannexe$`mercredi 20 novembre 2024`
+## $Lannexe$`mercredi 20 novembre 2024`$Déjeuner
+## $Lannexe$`mercredi 20 novembre 2024`$Déjeuner$`L&#39;Annexe`
+## [1] &quot;PASTA PARTY\\nNapolitaine\\nOU\\nChampignons&quot;
+## 
+## 
+## 
+## 
+## $`Le 32`
+## $`Le 32`$`mercredi 20 novembre 2024`
+## $`Le 32`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Le 32`$`mercredi 20 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Ragoût africain\\n-\\nHachis parmentier végétarien&quot;
+## 
+## $`Le 32`$`mercredi 20 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Salade d&#39;automne\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`mercredi 20 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Charlottine aux fruits rouges\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`jeudi 21 novembre 2024`
+## $`Le 32`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Le 32`$`jeudi 21 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Filet de poulet à l&#39;estragon\\n-\\nGalette de lentilles, betteraves et cèpes\\nGarnitures\\nPommes de terre charlottes au four\\nPanais et carottes&quot;
+## 
+## $`Le 32`$`jeudi 21 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Mini cake\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`jeudi 21 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Charlotte aux pommes et caramel\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`vendredi 22 novembre 2024`
+## $`Le 32`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Le 32`$`vendredi 22 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Filet de colin, sauce crème d&#39;asperges vertes\\n-\\nSamoussa végétarien\\nGarnitures\\nRiz de Camargue\\nFlan estival&quot;
+## 
+## $`Le 32`$`vendredi 22 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Salade asiatique aux légumes croquants\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`vendredi 22 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Blondie aux framboises\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`lundi 25 novembre 2024`
+## $`Le 32`$`lundi 25 novembre 2024`$Déjeuner
+## $`Le 32`$`lundi 25 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Filet de sandre, sauce crème\\n-\\nCurry de patates douces\\nGarnitures\\nPommes de terre à la suédoise\\nLégumes glacés au balsamique&quot;
+## 
+## $`Le 32`$`lundi 25 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Tatin d&#39;endives, chèvre et miel\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`lundi 25 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Financier pistache et framboises\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`mardi 26 novembre 2024`
+## $`Le 32`$`mardi 26 novembre 2024`$Déjeuner
+## $`Le 32`$`mardi 26 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Filet de poulet, sauce aux girolles\\n-\\nTorsades BIO aux courgettes et pois\\nGarnitures\\nPépinettes aux herbes\\nButternuts rôtis aux épices&quot;
+## 
+## $`Le 32`$`mardi 26 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Muffin salé, féta et olives\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`mardi 26 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Sablé ananas et framboises\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`mercredi 27 novembre 2024`
+## $`Le 32`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Le 32`$`mercredi 27 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Galette d&#39;avoine, sauce au fromage blanc\\nHaricots verts\\n-\\nRisotto aux champignons&quot;
+## 
+## $`Le 32`$`mercredi 27 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Crumble fromager aux noix\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`mercredi 27 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Demi cadre mandarine\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`jeudi 28 novembre 2024`
+## $`Le 32`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Le 32`$`jeudi 28 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Cuisse de canette au miel et sésame\\n-\\nGalette de lentilles, betteraves et cèpes\\nGarnitures\\nEcrasé de pommes de terre à l&#39;ail et ciboulette\\nCarottes vichy&quot;
+## 
+## $`Le 32`$`jeudi 28 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Fondue de potimarron\\nOeuf parfait\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`jeudi 28 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Dôme crème brûlée\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## $`Le 32`$`vendredi 29 novembre 2024`
+## $`Le 32`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Le 32`$`vendredi 29 novembre 2024`$Déjeuner$`Carte du jour au 32 - Plats`
+## [1] &quot;Filet de colin\\n-\\nSamoussa végétarien BIO\\nGarnitures\\nRiz de Camargue\\nButternuts&quot;
+## 
+## $`Le 32`$`vendredi 29 novembre 2024`$Déjeuner$Entrées
+## [1] &quot;Panna cotta chèvre et noisettes\\n-\\nSoupe de légumes&quot;
+## 
+## $`Le 32`$`vendredi 29 novembre 2024`$Déjeuner$Desserts
+## [1] &quot;Charlotte aux pommes et caramel\\n-\\nSalade de fruits frais&quot;
+## 
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;JOURNEE VERTE\\nBoulettes de blé thaï, sauce au fromage blanc maison\\nHaricots verts\\nBlé aux légumes\\n-\\nGalette de pommes de terre maison, sauce au fromage blanc maison\\nHaricots verts\\nSalade du jour\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nLe Bretzel burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;4 fromages\\nLégumes du soleil&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Colombo de porc maison\\nCarottes\\nPenne\\n-\\nGratin de légumes et lentilles corail maison\\nPenne\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Poulet\\nMozzarella&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Fricadelle de boeuf, jus corsé\\nHaricots plats carottes\\nBoulgour aux épices\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison\\nHaricots plats carottes\\nBoulgour aux épices\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Thon\\nChèvre&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Fish and chips, sauce rémoulade\\nHaricots verts à l&#39;ail\\nRiz pilaf\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Grecque\\nTartiflette&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Palette à la diable\\nBlé à la tomate\\nChou-fleur provençal\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Reine\\n4 saisons&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;JOURNEE VERTE\\nChili aux légumes\\nRiz\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nLe Bretzel burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Reine\\n4 saisons&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Paëlla maison\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Poulet\\nMozzarella&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Plat à emporter Box en verre réutilisable`
+## [1] &quot;Cordon bleu, sauce marchand de vin\\nDuo de carottes\\nPommes de terre wedges\\n-\\nCurry de légumes\\nRiz\\n4,50 \200 HT/4,95 \200 TTC\\n+ prix de la Box 5,70 \200 TTC&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Burger maison au choix`
+## [1] &quot;Formule avec frites\\nBurger de boeuf\\nChicken burger\\nVégé burger&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Pizza maison au choix`
+## [1] &quot;Thon\\nChèvre&quot;
+## 
+## $`Le Cristal Shop Ru Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Formule étudiante à 1\200 tarif boursier / non boursier 3,30 \200`
+## [1] &quot;Formule Be Fit\\nSandwich, eau plate ou gazeuse, fruit ou yaourt&quot;
+## 
+## 
+## 
+## 
+## $`Learning Center`
+## $`Learning Center`$`mercredi 20 novembre 2024`
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Tarte Irlandaise&quot;
+## 
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nThon mayo\\nLe dragon ball\\nWrap chicken roll&quot;
+## 
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner$Salade
+## [1] &quot;Bowl El Paso&quot;
+## 
+## $`Learning Center`$`mercredi 20 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Repas EPICUR GRECE :\\nMoussaka aux légumes\\nOU\\nRisotto vert aux pois et courgettes&quot;
+## 
+## 
+## 
+## $`Learning Center`$`jeudi 21 novembre 2024`
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Chaud: Burger / Burger végé&quot;
+## 
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta thon tomate&quot;
+## 
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Franc Comtois\\nWrap chicken roll&quot;
+## 
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Athéna&quot;
+## 
+## $`Learning Center`$`jeudi 21 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Repas EPICUR ALLEMAGNE : \\nWienerschnitzels (Escalope origine France)\\nPommes sautées\\nOU\\nSalsifis à la crème&quot;
+## 
+## 
+## 
+## $`Learning Center`$`vendredi 22 novembre 2024`
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Bowl nouilles chinoises acras&quot;
+## 
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta pesto&quot;
+## 
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nL&#39;Italien\\nMaxi rodele\\nLe taj mahal&quot;
+## 
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Syracuse&quot;
+## 
+## $`Learning Center`$`vendredi 22 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Repas EPICUR AUTRICHE:\\nHot dog Autrichien\\nWedges\\nOU\\nCurry de boulettes végétale\\nWedges&quot;
+## 
+## 
+## 
+## $`Learning Center`$`lundi 25 novembre 2024`
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Croque raclette jambon&quot;
+## 
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta fromage&quot;
+## 
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe thon mayo\\nWrap Chick&#39;N Roll\\nL&#39;Auvergnat&quot;
+## 
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Lima&quot;
+## 
+## $`Learning Center`$`lundi 25 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Boule d&#39;agneau\\nSauce piment doux\\nPilaf de quinoa et riz\\nBrunoise à la provençale\\nOU\\nKoshari&quot;
+## 
+## 
+## 
+## $`Learning Center`$`mardi 26 novembre 2024`
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Burger/ Burger végé&quot;
+## 
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta saumon&quot;
+## 
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe new bollygood\\nPavé De Vinci\\nLe dolca vita&quot;
+## 
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La New César&quot;
+## 
+## $`Learning Center`$`mardi 26 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Filet de poulet à l&#39;estragon\\nGratin pommes de terre chou fleur\\nOU\\nCrumble de potiron et de courgettes&quot;
+## 
+## 
+## 
+## $`Learning Center`$`mercredi 27 novembre 2024`
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Tarte à la choucroute&quot;
+## 
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta Bolognaise&quot;
+## 
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nMaxi seppele\\nL&#39;Indien\\nLe gourmand&quot;
+## 
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Vérone&quot;
+## 
+## $`Learning Center`$`mercredi 27 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Tartiflette aux champignons\\nOU\\nTajine aux pois chiches abricots et amandes/Boulghour&quot;
+## 
+## 
+## 
+## $`Learning Center`$`jeudi 28 novembre 2024`
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Burger/ Burger végé&quot;
+## 
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta carbonara&quot;
+## 
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Berger\\nThon mayo\\nLe ribambelle&quot;
+## 
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner$Salade
+## [1] &quot;L&#39;Alsacienne&quot;
+## 
+## $`Learning Center`$`jeudi 28 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Émincé de dinde à la crème (Origine France)\\nPurée de carottes\\nHaricots verts\\nOu\\nBourguignon de champignons\\nPurée de carottes&quot;
+## 
+## 
+## 
+## $`Learning Center`$`vendredi 29 novembre 2024`
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Pizza aux champignons&quot;
+## 
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner$`Pasta box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe Rustique\\nBagnat Lili\\nLe Basque&quot;
+## 
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner$Salade
+## [1] &quot;La Louisiana&quot;
+## 
+## $`Learning Center`$`vendredi 29 novembre 2024`$Déjeuner$`Plat du soir commande Crous&amp;amp;Go`
+## [1] &quot;Quenelle de brochet\\nSauce nantua\\nRiz pilaf\\nBrocolis\\nOU\\nCari réunionnais&quot;
+## 
+## 
+## 
+## 
+## $`Resto u Cronenbourg`
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Fajitas à la mexicaine, wedges&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Jambalaya&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Curry de pois chiche, riz&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 20 novembre 2024`$Déjeuner$Extension
+## [1] &quot;Fajitas à la mexicaine, wedges&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels : Paleron de bœuf, jus corsé, courgettes à la provençale, purée de pomme de terre\\nÉtudiants : Fricadelle, jus corsé, purée de pomme de terre&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Curry de poisson, semoule&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Paëlla aux légumes verts&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 21 novembre 2024`$Déjeuner$Extension
+## [1] &quot;Lasagne bolognaise, salade verte&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels : Poulet à la cubaine, poêlée chinoise, nouilles sautées\\nÉtudiants : Grillade du jour&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Émincé de porc au caramel, nouilles sautées&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;Carottes rôties aux lentilles&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 22 novembre 2024`$Déjeuner$Extension
+## [1] &quot;Émincé de dinde à la crème, riz aux légumes&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels : nuggets de poisson, haricots verts, frites, sauce cocktail\\nÉtudiants : hoki à la tomate, haricots verts, frites&quot;
+## 
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;curry de boulette d&#39;agneau, semoule, légumes couscous&quot;
+## 
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;quiche au fromage, haricots verts&quot;
+## 
+## $`Resto u Cronenbourg`$`lundi 25 novembre 2024`$Déjeuner$Extension
+## [1] &quot;cordon bolo, sauce tomate, wedges épicés&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels :  cuisse de canard,brocolis, purée de patates douce, sauce à l&#39;orange\\nÉtudiants : wings de poulet, gratin dauphinois, poêlée asiatique&quot;
+## 
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;osso bucco, spaghetti&quot;
+## 
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;galette d&#39;avoine, brocolis, sauce fromage blanc&quot;
+## 
+## $`Resto u Cronenbourg`$`mardi 26 novembre 2024`$Déjeuner$Extension
+## [1] &quot;wings de poulet, gratin dauphinois&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;coudes gratinés&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;galette épinard fromage, risotto aux légumes&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;enchiladas, choux-fleurs à la polonaise&quot;
+## 
+## $`Resto u Cronenbourg`$`mercredi 27 novembre 2024`$Déjeuner$Extension
+## [1] &quot;enchiladas, choux-fleurs à la polonaise&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels : crépinette ou saucisse de Toulouse, jus au thym, purée de pomme de terre, carottes au céleri branche\\nÉtudiants : saucisse de Toulouse, purée de pomme de terre, carottes au céleri branche&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Personnels : carbonnade flamande, purée de pomme de terre\\nÉtudiants : steak haché, purée de pomme de terre&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;tarte à l&#39;oignon, carottes au céleri branche&quot;
+## 
+## $`Resto u Cronenbourg`$`jeudi 28 novembre 2024`$Déjeuner$Extension
+## [1] &quot;fishburger, pommes de terre rôties&quot;
+## 
+## 
+## 
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`$Déjeuner$Grillade
+## [1] &quot;Personnels : curry wurst, frites, embeurrée de petits légumes\\nÉtudiants : grillade du jour&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Personnels : escalope viennoise, sauce tomate, penne\\nÉtudiants : crêpes au jambon, frites&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`$Déjeuner$Végétarien
+## [1] &quot;camembert frit, pomme de terre vapeur, embeurrée de petits légumes&quot;
+## 
+## $`Resto u Cronenbourg`$`vendredi 29 novembre 2024`$Déjeuner$Extension
+## [1] &quot;pizza chèvre et lardons, accompagnement stock&quot;
+## 
+## 
+## 
+## 
+## $`Resto u De Colmar`
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR GRECE :\\nMoussaka de Lentilles\\nOU\\nRisotto Vert aux Petits pois et Courgettes&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Champignons à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 20 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Parisien\\nLe Maraîcher\\nLe Thon Mayo\\nLe Mystère de l&#39;Ouest\\nLe SARD ACADEMY\\nLe Panini : Bolo&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR ALLEMAGNE :\\nWienerschnitzels \\n(Escalope de Porc Panée Origine France)\\nPommes de terres sautées\\nChou Romanesco\\nOU \\nPizza Champignons&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Thon à la Tomate à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 21 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Campagnard\\nLe Végéta\\nLe Franc Comtois\\nLe Wrap : Le Chicken Roll\\nLE SARD ACADEMY&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR AUTRICHE :\\nHot DOG (porc)\\nFrites\\nOU\\nCurry de Boulettes -Falafel\\nFrites&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Pesto à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 22 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Parisien\\nLe Maraîcher\\nL&#39;Italien\\nLa Mauricette : Le Rodele\\nLe SARD ACADEMY\\nLe Panini : Le Venezia&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Boule d&#39;Agneau\\nSauce piment doux\\nPilaf de quinoa et riz\\nBrunoise à la provençale\\nOU\\nKoshari&quot;
+## 
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Fromage à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`lundi 25 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Parisien\\nLe Maraîcher\\nLe Thon Mayo\\nLe Wrap : Le Chicken Roll\\nLe SARD ACADEMY&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Filet de Poulet à l&#39;Estragon\\nGratin Pommes de Terre et Chou Fleur\\nOu\\nSpaghettis à la Bolognaise de Boeuf\\nOU\\nCrumble de Potiron et de Courgettes&quot;
+## 
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Saumon à 3,60 euros&quot;
+## 
+## $`Resto u De Colmar`$`mardi 26 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Campagnard\\nLe Végéta\\nLe Pavé :Le De Vinci\\nLe Bollygood\\nLE SAR ACADEMY&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Tartiflette aux Champignons\\nOU\\nTajine aux Pois Chiches Abricots et Amandes\\nBoulghour&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Bolognaise à 3,60 euros&quot;
+## 
+## $`Resto u De Colmar`$`mercredi 27 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Maraîcher\\nL&#39;Indien\\nLa Mauricette : Le Sepele\\nLe Panini : La Chevrette\\nLE SARD ACADEMY&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Émincé de Dinde à la Crème \\n(Origine France)\\nPurée de carottes\\nHaricots verts\\nOU\\nBourguignon de Champignons\\nPurée de carottes&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Carbonara à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`jeudi 28 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Campagnard\\nLe Végéta\\nLe Thon Mayo\\nLe Berger\\nLe SARD ACADEMY&quot;
+## 
+## 
+## 
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner$`Menu du jour 3.30\200 ou 1\200`
+## [1] &quot;Quenelle de Brochet\\nSauce Nantua\\nRiz pilaf\\nBrocolis\\nOU\\nCari Réunionnais&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner$`Les grillades à la carte HT`
+## [1] &quot;Steak/frites ou légumes à 3,60 euros (l&#39;assiette)\\n(Origine France)\\nLégumes/Féculents à 2,50 euros (l&#39;assiette)\\nFrites à 2,50 euros (le cornet)\\nL&#39;américain à 4,00 euros (le Sandwich)\\n(Origine France)&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner$`Viennoiseries HT`
+## [1] &quot;En Vente à partir de 8h30 :\\nCroissant Nature à 1,10 euros\\nPain au Chocolat à 1,20 euros\\nAutre Viennoiserie de 1,10 à 1,40 euros&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner$`La Pasta box HT`
+## [1] &quot;Sauce Champignons à 3,20 euros&quot;
+## 
+## $`Resto u De Colmar`$`vendredi 29 novembre 2024`$Déjeuner$`Les sandwichs HT`
+## [1] &quot;Le Parisien\\nLe Maraîcher\\nLe Rustique\\nLe Panini : Le Venezia\\nLe SARD ACADEMY&quot;
+## 
+## 
+## 
+## 
+## $`Resto u De Lillberg`
+## $`Resto u De Lillberg`$`mercredi 20 novembre 2024`
+## $`Resto u De Lillberg`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`mercredi 20 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Repas EPICUR GRECE :\\nMoussaka aux légumes\\nOU\\nRisotto vert aux pois et courgettes&quot;
+## 
+## $`Resto u De Lillberg`$`mercredi 20 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Émincé végétal à la Chinoise\\nNouilles sautées à la Pékinoise&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`jeudi 21 novembre 2024`
+## $`Resto u De Lillberg`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`jeudi 21 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Repas EPICUR ALLEMAGNE : \\nWienerschnitzels (Escalope origine France)\\nPommes sautées\\nOU\\nSalsifis à la crème\\nOU\\nPizza au fromage&quot;
+## 
+## $`Resto u De Lillberg`$`jeudi 21 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Cuisse de poulet en croûte d&#39;herbes (Origine France)\\nFrites\\nHaricots verts&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`vendredi 22 novembre 2024`
+## $`Resto u De Lillberg`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`vendredi 22 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Repas EPICUR AUTRICHE:\\nHot dog Autrichien\\nFrites\\nOU\\nCurry de boulettes végétale\\nFrites&quot;
+## 
+## $`Resto u De Lillberg`$`vendredi 22 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Croziflette&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`lundi 25 novembre 2024`
+## $`Resto u De Lillberg`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`lundi 25 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Boule d&#39;agneau\\nSauce piment doux\\nPilaf de quinoa et riz\\nBrunoise à la provençale\\nOU\\nKoshari&quot;
+## 
+## $`Resto u De Lillberg`$`lundi 25 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Choucroute 3 viandes (Origines France)&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`mardi 26 novembre 2024`
+## $`Resto u De Lillberg`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`mardi 26 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Filet de poulet à l&#39;estragon\\nGratin pommes de terre chou fleur\\nOU\\nSpaghettis à la Bolognaise\\nOU\\nCrumble de potiron et de courgettes&quot;
+## 
+## $`Resto u De Lillberg`$`mardi 26 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Osso bucco à la Milanaise\\nSpaghettis à la Bolognaise\\nBrocolis à la romaine&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`mercredi 27 novembre 2024`
+## $`Resto u De Lillberg`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`mercredi 27 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Tartiflette aux champignons\\nOU\\nTajine aux pois chiches abricots et amandes/Boulghour&quot;
+## 
+## $`Resto u De Lillberg`$`mercredi 27 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Lasagnes aux légumes grillés\\nSalade verte&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`jeudi 28 novembre 2024`
+## $`Resto u De Lillberg`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`jeudi 28 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Émincé de dinde à la crème (Origine France)\\nPurée de carottes\\nHaricots verts\\nOu\\nPennes caprese\\nOU\\nBourguignon de champignons\\nPurée de carottes&quot;
+## 
+## $`Resto u De Lillberg`$`jeudi 28 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Couscous (bœuf et poulet origine France)&quot;
+## 
+## 
+## 
+## $`Resto u De Lillberg`$`vendredi 29 novembre 2024`
+## $`Resto u De Lillberg`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u De Lillberg`$`vendredi 29 novembre 2024`$Déjeuner$`Menu étudiant - Tarif social`
+## [1] &quot;Quenelle de brochet\\nSauce nantua\\nRiz pilaf\\nBrocolis\\nOU\\nMacaronis au jambon fumé et légumes\\nOU\\nCari réunionnais&quot;
+## 
+## $`Resto u De Lillberg`$`vendredi 29 novembre 2024`$Déjeuner$`Brasseur 4,70HT / 5.17TTC euros`
+## [1] &quot;Bouchée aux fruits de mer et au poisson\\nTagliatelles\\nCarottes rondelles&quot;
+## 
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR GRECE :\\nMoussaka aux légumes\\nOU\\nRisotto vert aux pois et courgettes&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nThon mayo\\nWrap chicken roll\\nChaud: Panini Bolognaise&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 20 novembre 2024`$Déjeuner$Salades
+## [1] &quot;Bowl El Paso&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR ALLEMAGNE : \\nWienerschnitzels (Escalope origine France)\\nPommes sautées\\nOU\\nSalsifis à la crème\\nOU\\nPizza au fromage&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Franc Comtois\\nWrap chicken roll\\nChaud: Burger / Burger végé&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta thon tomate&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 21 novembre 2024`$Déjeuner$Salades
+## [1] &quot;L&#39;Athéna&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Repas EPICUR AUTRICHE:\\nHot dog Autrichien\\nFrites\\nOU\\nCurry de boulettes végétale\\nFrites&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nL&#39;Italien\\nMaxi rodele\\nChaud: Panini Le Vénézia&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta pesto&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 22 novembre 2024`$Déjeuner$Salades
+## [1] &quot;La Syracuse&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Boule d&#39;agneau\\nSauce piment doux\\nPilaf de quinoa et riz\\nBrunoise à la provençale\\nOU\\nKoshari&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe thon mayo\\nWrap Chick&#39;N Roll\\nChaud: Croque raclette jambon&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta fromage&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`lundi 25 novembre 2024`$Déjeuner$Salades
+## [1] &quot;La Lima&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Filet de poulet à l&#39;estragon\\nGratin pommes de terre chou fleur\\nOU\\nSpaghettis à la Bolognaise\\nOU\\nCrumble de potiron et de courgettes&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe new bollygood\\nPavé De Vinci\\nChaud: Burger / Burger végé&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta saumon&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mardi 26 novembre 2024`$Déjeuner$Salades
+## [1] &quot;La New César&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Tartiflette aux champignons\\nOU\\nTajine aux pois chiches abricots et amandes/Boulghour&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nMaxi seppele\\nL&#39;Indien\\nChaud: Panini chevrette&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta Bolognaise&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`mercredi 27 novembre 2024`$Déjeuner$Salades
+## [1] &quot;La Vérone&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Émincé de dinde à la crème (Origine France)\\nPurée de carottes\\nHaricots verts\\nOu\\nPennes caprese\\nOU\\nBourguignon de champignons\\nPurée de carottes&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Végéta\\nLe Campagnard\\nLe Berger\\nThon mayo\\nChaud: Burger/ Burger végé&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Burger / Burger végé&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`jeudi 28 novembre 2024`$Déjeuner$Salades
+## [1] &quot;L&#39;Alsacienne&quot;
+## 
+## 
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`$Déjeuner$`Menu étudiant 3.30\200 ou 1\200`
+## [1] &quot;Quenelle de brochet\\nSauce nantua\\nRiz pilaf\\nBrocolis\\nOU\\nMacaronis au jambon fumé et légumes\\nOU\\nCari réunionnais&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`$Déjeuner$Sandwichs
+## [1] &quot;Le Maraicher\\nLe Parisien\\nLe Rustique\\nBagnat Lili\\nChaud: Panini Le Vénézia&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`$Déjeuner$`Pasta Box`
+## [1] &quot;Pasta champignons&quot;
+## 
+## $`Resto u De Liut Mulhouse`$`vendredi 29 novembre 2024`$Déjeuner$Salades
+## [1] &quot;La Louisiana&quot;
+## 
+## 
+## 
+## 
+## $`Resto u Esplanade`
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPané au fromage, sauce forestière maison\\nHaricots verts\\nFrites\\n-\\nPancakes maison olives et féta, sauce forestière maison\\nHaricots verts\\n1er étage :\\nBoulettes de blé thaï, raïta aux herbes maison\\nHaricots verts\\nBlé à la tomate\\n-\\nPenne, sauce aux 3 fromages maison\\n-\\nGalette de pommes de terre maison, raïta aux herbes maison\\nHaricots verts\\nSoupe de légumes du jour :\\nChou-fleur&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Donut\\nCake nature\\nCocktail de fruits&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nBoulettes de blé thaï, sauce au fromage blanc maison\\nHaricots verts\\nBlé aux légumes\\n-\\nGalette de pommes de terre maison, sauce au fromage blanc maison\\nHaricots verts\\nSalade du jour&quot;
+## 
+## 
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Curry de légumes maison BIO\\nEbly safrané BIO\\n-\\nGalette de lentilles BIO\\nHaricots BIO\\nEbly safrané BIO&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 20 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan au chocolat BIO\\nTarte aux pommes BIO&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nViennoise, sauce tomate\\nCarottes\\nFrites\\n-\\nGratin de légumes et lentilles corail maison\\nPenne\\n1er étage :\\nColombo de porc maison\\nCarottes\\nPenne\\n-\\nPenne, sauce à la volaille maison\\n-\\nGratin de légumes et lentilles corail maison\\nPenne&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Flan litchis framboises\\nBeignet au chocolat et noisettes\\nTarte aux pommes et à la rhubarbe&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nColombo de porc maison\\nCarottes\\nPenne\\n-\\nGratin de légumes et lentilles corail maison\\nPenne&quot;
+## 
+## 
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Echine de porc aux cacahuètes maison\\nRiz cantonnais\\nPommes de terre au four\\n-\\nSamoussa aux légumes, sauce au miel\\nRiz cantonnais&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 21 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan litchis framboises\\nBeignet au chocolat et noisettes\\nTarte aux pommes et à la rhubarbe&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nSaucisse de volaille, jus corsé\\nHaricots plats carottes\\nFrites\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison\\nHaricots plats carottes\\nBoulgour aux épices\\n1er étage :\\nFricadelle de boeuf, jus corsé\\nHaricots plats carottes\\nBoulgour aux épices\\n-\\nPenne, sauce arrabiata maison\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison\\nHaricots plats carottes\\nBoulgour aux épices&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Blondie aux framboises\\nCocktail de fruits exotiques\\nEclair vanille&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nFricadelle de boeuf, jus corsé\\nHaricots plats carottes\\nBoulgour aux épices\\n-\\nQuiche aux pommes de terre, poireaux et épinards maison&quot;
+## 
+## 
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Cuisse de poulet à l&#39;américaine maison\\nTrio de légumes\\nPommes de terre au four\\n-\\nQuiche au fromage\\nTrio de légumes\\nPommes de terre au four&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 22 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Blondie aux framboises\\nCocktail de fruits exotiques\\nEclair vanille&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nSaucisse de Toulouse, jus corsé au thym\\nHaricots verts à l&#39;ail\\nFrites\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf\\n1er étage :\\nFish and chips, sauce rémoulade\\nHaricots verts à l&#39;ail\\nRiz pilaf\\n-\\nFarfalles, sauce bolognaise maison\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf&quot;
+## 
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Paris-Brest\\nTarte au citron\\nCompote de pommes aux spéculoos&quot;
+## 
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nFish and chips, sauce rémoulade\\nHaricots verts à l&#39;ail\\nRiz pilaf\\n-\\nMafé aux légumes, sauce au sésame maison\\nRiz pilaf&quot;
+## 
+## 
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Cordon bleu, sauce crème aux champignons\\nBrocolis\\nPurée de pommes de terre\\n-\\nCoudes gratinés\\nBrocolis&quot;
+## 
+## $`Resto u Esplanade`$`lundi 25 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Paris-Brest\\nTarte au citron\\nCompote de pommes aux spéculoos&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nViennoise, sauce tomate\\nChou-fleur provençal\\nFrites\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal\\n1er étage :\\nPalette à la diable\\nBlé à la tomate\\nChou-fleur provençal\\n-\\nFarfalles, sauce aux 3 fromages maison\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal&quot;
+## 
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Clafoutis aux poires et pépites de chocolat\\nEclair vanille\\nMini donut&quot;
+## 
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nPalette à la diable\\nBlé à la tomate\\nChou-fleur provençal\\n-\\nGalette de quinoa provençale, sauce tomate\\nBlé à la tomate\\nChou-fleur provençal&quot;
+## 
+## 
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Filet de poulet, sauce crème\\nHaricots beurre\\nBlé safrané\\n-\\nDahl crémeux de pois cassés\\nBlé safrané&quot;
+## 
+## $`Resto u Esplanade`$`mardi 26 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Clafoutis aux poires et pépites de chocolat\\nEclair vanille\\nMini donut&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;JOURNEE VERTE\\n2ème étage :\\nPoutine maison\\nBrocolis\\nFrites\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis\\n1er étage :\\nChili aux légumes\\nRiz\\n-\\nNouilles chinoises maison\\nWok de légumes\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Tarte normande\\nMillefeuille\\nCake nature&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nChili aux légumes\\nRiz\\n-\\nLasagnes aux épinards et ricotta maison\\nBrocolis&quot;
+## 
+## 
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Galette de tofu BIO, sauce tomate\\nGratin de chou-fleur\\nPommes de terre BIO maison\\n-\\nOmelette au fromage\\nGratin de chou-fleur\\nPommes de terre BIO maison&quot;
+## 
+## $`Resto u Esplanade`$`mercredi 27 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan au caramel BIO\\nTarte aux pommes BIO&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nMerguez, sauce tomate\\nJulienne de légumes et coriandre\\nFrites\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour\\n1er étage :\\nPaëlla maison\\n-\\nFarfalles, sauce arrabiata maison\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Beignet au chocolat\\nTarte coco\\nFromage blanc crème de marrons et vanille&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nPaëlla maison\\n-\\nSamoussa aux légumes\\nJulienne de légumes et coriandre\\nBoulgour&quot;
+## 
+## 
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Boulettes d&#39;agneau\\nLégumes couscous\\nSemoule\\n-\\nTajine de pois chiches, abricots et amandes maison\\nSemoule&quot;
+## 
+## $`Resto u Esplanade`$`jeudi 28 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Beignet au chocolat\\nTarte coco\\nFromage blanc, crème de marrons et vanille&quot;
+## 
+## 
+## 
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Menus étudiants 1er et 2ème étage`
+## [1] &quot;2ème étage :\\nPilons de poulet, sauce marchand de vin\\nDuo de carottes\\nFrites\\n-\\nCurry de légumes\\nRiz\\n1er étage :\\nCordon bleu, sauce marchand de vin\\nDuo de carottes\\nPommes de terre wedges\\n-\\nFarfalles, sauce carbonara maison\\n-\\nCurry de légumes\\nRiz&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Desserts 1er et 2ème étage`
+## [1] &quot;Flan chocolat et noisettes\\nEclair au café\\nTarte aux poires&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Déjeuner$`Cristal Shop (RDC) Cafétéria`
+## [1] &quot;Plat à emporter en box en verre ou sur place\\nCordon bleu, sauce marchand de vin\\nDuo de carottes\\nPommes de terre wedges\\n-\\nCurry de légumes\\nRiz&quot;
+## 
+## 
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Dîner
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Dîner$`Menus étudiants 2ème étage`
+## [1] &quot;Farfalles bolognaises\\n-\\nQuiche aux poireaux\\nFarfalles&quot;
+## 
+## $`Resto u Esplanade`$`vendredi 29 novembre 2024`$Dîner$`Desserts 2ème étage`
+## [1] &quot;Flan chocolat et noisettes\\nEclair au café\\nTarte aux poires&quot;
+## 
+## 
+## 
+## 
+## $`Resto u Gallia`
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Déjeuner$`MENU ETUDIANT`
+## [1] &quot;MENU 100% VEGETARIEN\\nGalette de seitan aux légumes et tomates confites BIO\\nHaricots vert et blé BIO\\nSamoussa aux légumes sauce chinoise&quot;
+## 
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Déjeuner$BRASSERIE
+## [1] &quot;MENU 100% VEGETARIEN\\nBruschetta tomates courgettes et chèvre\\nSalade et frites\\nPizza margarita\\nTarte flambée au Munser&quot;
+## 
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Déjeuner$`VENTE A EMPORTER`
+## [1] &quot;FORMULE ÉTUDIANTE : Parisien et Maraicher\\nÉDITION LIMITÉE : Le Sard&#39; Academy\\nLe Pavé Ghandi\\nPasta box au saumon&quot;
+## 
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Déjeuner$`MENU VEGETARIEN`
+## [1] &quot;TOUS LES MERCREDIS MIDI MENU 100% VEGETARIEN&quot;
+## 
+## 
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Dîner
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Dîner$`MENU ETUDIANT`
+## [1] &quot;Echine de porc à la diable\\nCourgettes poêlée et pommes de terre persillées&quot;
+## 
+## $`Resto u Gallia`$`mercredi 20 novembre 2024`$Dîner$`MENU VEGETARIEN`
+## [1] &quot;Galette épinards et fromage blanc\\nCourgettes poêlée et pommes de terre persillées&quot;
+## 
+## 
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Déjeuner$`MENU ETUDIANT`
+## [1] &quot;Cordon bleu\\nPetits pois et purée de pommes de terre à l&#39;ancienne&quot;
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Déjeuner$BRASSERIE
+## [1] &quot;Travers de porc caramélisés au sirop d&#39;érable\\nPorc origine France\\nPetits pois et purée de pommes de terre à l&#39;ancienne\\nPizza jambon et champignons\\nTarte flambée forestière&quot;
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Déjeuner$`VENTE A EMPORTER`
+## [1] &quot;FORMULE ÉTUDIANTE : Parisien et Maraicher\\nÉDITION LIMITÉE : Le Sard Academy\\nLe Pavé Ghandi\\nChickenburger&quot;
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Déjeuner$`MENU VEGETARIEN`
+## [1] &quot;Parmentier végétarien et salade verte&quot;
+## 
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Dîner
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Dîner$`MENU ETUDIANT`
+## [1] &quot;Boulettes d&#39;agneau façon Tikka\\nJulienne de légumes et boulghour&quot;
+## 
+## $`Resto u Gallia`$`jeudi 21 novembre 2024`$Dîner$`MENU VEGETARIEN`
+## [1] &quot;Tajine de légumes&quot;
+## 
+## 
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Déjeuner$`MENU ETUDIANT`
+## [1] &quot;Saucisse de Toulouse\\nBrocolis et frites&quot;
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Déjeuner$BRASSERIE
+## [1] &quot;Pavé de saumon légèrement fumé par nos soins\\nBrocolis\\nFéculents du jour\\nPizza  et tarte flambée du jour&quot;
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Déjeuner$`VENTE A EMPORTER`
+## [1] &quot;FORMULE ÉTUDIANTE : Parisien et Maraicher\\nÉDITION LIMITÉE : Le Sard Academy\\nLe Pavé Ghandi\\nHot dog&quot;
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Déjeuner$`MENU VEGETARIEN`
+## [1] &quot;Friand au fromage\\nBrocolis et frites&quot;
+## 
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Dîner
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Dîner$`MENU ETUDIANT`
+## [1] &quot;Poisson bordelais\\nLégumes et féculents du jour&quot;
+## 
+## $`Resto u Gallia`$`vendredi 22 novembre 2024`$Dîner$`MENU VEGETARIEN`
+## [1] &quot;Végé du jour&quot;
+## 
+## 
+## 
+## 
+## $`Resto u Illkirch`
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Tajine d&#39;épeautre et lentilles&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Enchiladas à la provençale&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Gratin de macaronis aux légumes&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Bouchées d&#39;Edamame et carottes\\nSauce aigre douce au cacahuètes&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Mousse au chocolat\\nou\\nBeignets à la framboise&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Millefeuille de chèvre et avocat aux agrumes\\nou\\nSalade Hollandaise&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Crumble de légumes au pian d&#39;épice&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Tajine d&#39;épeautre et lentilles&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Enchiladas à la provençale\\nSalade&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 20 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte au fromage blanc\\nou\\nMousse au chocolat&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Jambalaya aux haricots rouges&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Poisson meunière,sauce rémoulade\\nBlé\\nCourgettes à la provençale&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Lasagnes&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Pilons de poulet basquaise\\nou\\nSaucisse de Toulouse&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Ile flottante\\nou\\nBaba au rhum&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Salade gecque\\nou\\nTartine de hareng fumé&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Choucroute&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Jambalaya aux haricots rouges&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Poisson meunière,sauce rémoulade\\nBlé\\nCourgettes à la provençale&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 21 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte aux fruits\\nou\\nIle flottante&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Galette de blé aux épinards\\nMayonnaise au curry\\nPoêlée rustique&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Émincé de dinde au lait de coco\\nAchard de légumes\\nLentilles&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Penne aux trois fromages&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Steak haché de bœuf\\nFrites&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Crème caramel au beurre salé\\nou\\nSalade de fruits&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Assiette garnie de magret et pousse d&#39;épinards\\nou\\nSalade thaï au concombre&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Steak haché de boeuf, sauce au poivre vert\\nFrites\\nHaricots verts&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Galette de blé aux épinards\\nMayonnaise au curry\\nPoêlée rustique&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Aiguillettes de poulet panées\\nPurée\\nCarottes à l&#39;oriental&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 22 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte aux abricots\\nou\\nCrumble poires-chocolat&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Bouchées forestières\\nBlé&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Chili con carne\\nRiz&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Spaghettis à la carbonara&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Cervelas Bernois\\nou\\nNuggets de poulet&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Fromage blanc aux fruits\\nou\\nCocktail de fruits&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Salade aux 3 fromages\\nou\\nSalade d&#39;avocat au crabe et pamplemousse&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Tajine de boeuf aux légumes\\nCarottes aux épices\\nSemoule&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Bouchées forestières\\nBlé&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Chili con carne\\nRiz&quot;
+## 
+## $`Resto u Illkirch`$`lundi 25 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte aux poires\\nou\\nFromage blanc aux fruits&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Crumble de butternut et de pommes de terre&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Aiguillettes de poulet panées\\nBrunoise provençale\\nPommes de terre sautées&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Farfalles aux champignons et persil\\nou\\nFarfalles aux 3 fromages&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Brochette de dinde à l&#39;indienne\\nou\\nFilet de dinde rôti\\nFrites&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Chou à la vanille\\nou\\nCompotes de pêches&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Cocktail de crevettes et pomelos\\nou\\nFrisée aux lardons et fromage blanc&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Bavette de boeuf,sauce au poivre vert\\nFrites\\nChoux de Bruxelles&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Crumble de butternut et de pommes de terre&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Aiguillettes de poulet panées\\nBrunoise provençale\\nPommes de terre sautées&quot;
+## 
+## $`Resto u Illkirch`$`mardi 26 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte à l&#39;ananas\\nou\\nEclair à la vanille&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Röstis à la savoyarde\\nChou fleur&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Moussaka aux légumes&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Mac and cheese&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Galette de sarrasin aux lentilles\\nFrites&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Compote d&#39;abricots\\nou\\nCake au chocolat&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Oeuf à la russe\\nou\\nTartare de légumes,crème au mascarpone&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Morbiflette&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Moussaka aux légumes&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Röstis à la savoyarde\\nChou fleur&quot;
+## 
+## $`Resto u Illkirch`$`mercredi 27 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte aux pêches et amandes\\nOu\\nMousse au chocolat blanc&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Tortillas aux oignons et pommes de terre\\nSalade&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Filet de poisson meunière,sauce rémoulade\\nBâtonnière de légumes\\nPommes de terre rôties&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Spaëtzlé à la tyrolienne&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Saucisse blanche\\nFrites&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Segments de fruits\\nou\\nCheesecake maison&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Salade de chèvre chaud\\nou\\nSalade de poulet tandoori&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Kassler sauce raifort\\nChou rouge\\nPurée&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Tortillas aux oignons et pommes de terre\\nSalade&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Filet de poisson meunière,sauce rémoulade\\nBâtonnière de légumes\\nCoudes rayés&quot;
+## 
+## $`Resto u Illkirch`$`jeudi 28 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte au citron meringuée\\nou\\nEntremet poire-caramel&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$CAFETERIA
+## [1] &quot;Petits-déjeuners à partir de 7h45\\nSandwichs à partir de 9h45\\nFormules à emporter\\nSnacking chaud\\nDesserts variés\\nBoissons chaudes et froides&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - ENTREES`
+## [1] &quot;Crudités variées&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PLAT VEGETARIEN`
+## [1] &quot;Couscous aux petits légumes&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS -  MENU DU JOUR`
+## [1] &quot;Choucroute&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - PATES`
+## [1] &quot;Spaghettis à la bolognaise&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - BARBECUE`
+## [1] &quot;Pilons de poulet laqués au miel\\nFrites&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES ETUDIANTS - DESSERTS`
+## [1] &quot;Compote de pêches\\nou\\nCrème chocolat-noisettes&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - ENTREES`
+## [1] &quot;Salade mixte\\nou\\nSalade baltique&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS -  SUGGESTION DU JOUR`
+## [1] &quot;Pilon de poulet laqué au miel\\nPurée de céleri\\nCarottes au gingembre et coriandre&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - PLAT VEGETARIEN`
+## [1] &quot;Couscous aux petits légumes&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS  -  MENU DU JOUR`
+## [1] &quot;Spaghettis à la bolognaise&quot;
+## 
+## $`Resto u Illkirch`$`vendredi 29 novembre 2024`$Déjeuner$`SALLE DES PERSONNELS - DESSERTS`
+## [1] &quot;Tarte aux pommes-streusel\\nou\\nCrème chocolat-noisette&quot;
+## 
+## 
+## 
+## $`Resto u Illkirch`$`lundi 2 décembre 2024`
+## $`Resto u Illkirch`$`lundi 2 décembre 2024`$Déjeuner
+## named list()
+## 
+## 
+## $`Resto u Illkirch`$`mardi 3 décembre 2024`
+## $`Resto u Illkirch`$`mardi 3 décembre 2024`$Déjeuner
+## named list()
+## 
+## 
+## 
+## $`Resto u Paul Appell`
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`$Déjeuner
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`$Déjeuner$`Pôle végétal`
+## [1] &quot;Chili Sin Carne\\nRiz&quot;
+## 
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`$Déjeuner$`Flam and Co`
+## [1] &quot;Poutine Végétale&quot;
+## 
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`$Déjeuner$`Plat du jour`
+## [1] &quot;Galette de potiron &amp;amp; boulgour\\nRiz aux petits légumes&quot;
+## 
+## $`Resto u Paul Appell`$`mercredi 20 novembre 2024`$Déjeuner$Annexe
+## [1] &quot;PASTA PARTY\\nNapolitaine\\nOU\\nChampignons&quot;</code></pre>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
