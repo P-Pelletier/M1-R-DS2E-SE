@@ -444,9 +444,8 @@ get_page <- function(urlpage) {
   # Get the HTML from the webpage
   res <- httr::GET(urlpage, user_agent)
   
-  # Parse the HTML
-  soup <- read_html(res)
-  return(as.character(soup))
+  clean_html = str_replace_all(as.character(html),'[\\t\\r\\n\\f]','')
+  return(clean_html)
 }
 
 # Example usage
