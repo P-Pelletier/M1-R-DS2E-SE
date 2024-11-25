@@ -455,7 +455,7 @@ page_content <- get_page(urlpage)
 
 ```
 
-<a href="">Detailled solution</a> 
+<a href="Resto_u.html">Detailled solution</a> 
 
 
 <!--

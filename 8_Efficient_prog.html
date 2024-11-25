@@ -408,7 +408,7 @@ library(tictoc)
 tic()
 sum_x = X+X
 toc()
-## 0.92 sec elapsed
+## 0.61 sec elapsed
 
 tic()
 sum_sparse_x = sparse_X+sparse_X
@@ -452,7 +452,7 @@ for(i in 1:500){
   coefs[i,] = lm_bs()
 }
 toc()
-## 26.73 sec elapsed</code></pre>
+## 26.52 sec elapsed</code></pre>
 <ul>
 <li>Check how many cores you can use</li>
 </ul>
@@ -480,7 +480,7 @@ coefs =  foreach(i = 1:500,.packages = c(&#39;base&#39;)) %dopar% {
                    }
 
 toc()
-## 6.3 sec elapsed</code></pre>
+## 6.23 sec elapsed</code></pre>
 </div>
 </div>
 </div>
@@ -567,31 +567,31 @@ results &lt;- lapply(list_,FUN = calc_try)</code></pre>
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.04281211 secs</code></pre>
+<pre><code>## Time difference of 0.04579592 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 1.223583 secs</code></pre>
+<pre><code>## Time difference of 1.263656 secs</code></pre>
 <pre class="r"><code># compare it 
 list_ = create_dirty_list(0.33)
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.03385115 secs</code></pre>
+<pre><code>## Time difference of 0.03384781 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.869293 secs</code></pre>
+<pre><code>## Time difference of 0.8956091 secs</code></pre>
 <pre class="r"><code># compare it 
 list_ = create_dirty_list(0.75)
 t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc3)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.019912 secs</code></pre>
+<pre><code>## Time difference of 0.02096391 secs</code></pre>
 <pre class="r"><code>t &lt;- Sys.time()
 results &lt;- lapply(list_,FUN = calc_try)
 Sys.time()-t</code></pre>
-<pre><code>## Time difference of 0.424021 secs</code></pre>
+<pre><code>## Time difference of 0.439127 secs</code></pre>
 </div>
 </div>
 </div>
