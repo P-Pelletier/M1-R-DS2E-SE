@@ -16,7 +16,7 @@ div.r pre { background-color: #f8f8ff; }
 ```{r,echo=F}
 library(downloadthis)
 download_link(
-  link = "https://github.com/master-ds2e/M1-Programming/raw/gh-pages/data/covid_papers.zip",
+  link = "https://github.com/master-ds2e/M1-Programming/raw/master/data/covid_papers.zip",
   button_label = "Download Data",
   button_type = "primary",
   has_icon = TRUE,
@@ -2384,7 +2384,7 @@ rbindlist(lapply(c("cp_datatable.csv", "cp_datatable.csv"), fread))
 ```{r,echo=F}
 library(downloadthis)
 download_link(
-  link = "https://github.com/master-ds2e/M1-Programming/raw/gh-pages/data/data.zip",
+  link = "https://github.com/master-ds2e/M1-Programming/raw/master/data/data.zip",
   button_label = "Download Data",
   button_type = "danger",
   has_icon = TRUE,
@@ -2417,16 +2417,16 @@ Using first ```dplyr``` and the ```tidyverse```, Use ```table_1.csv```, ```table
 
 - Select the top 25 of countries involved in coronavirus research since 2001, plot the evolution on a bar chart with plot_ly
 
-<a href="">Solution with dplyr</a> -->
+<a href="exo_chap_4_tibble.html">Solution with dplyr</a> -->
 
 
 Can you redo the exercice using the data.table library?
 
 
-<a href="">Solution with data.table</a> 
+<a href="exo_chap_4_dt.html">Solution with data.table</a> 
 
 <!--
-exo_chap_4_tibble.html
-exo_chap_4_dt.html
+
+
 -->
 

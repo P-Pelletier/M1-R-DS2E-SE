@@ -72,7 +72,7 @@ download_link(
 ```{r,echo=F}
 library(downloadthis)
 download_link(
-  link = "https://github.com/master-ds2e/M1-Programming/raw/gh-pages/examples/exam_2021.zip",
+  link = "https://github.com/P-Pelletier/M1-R-DS2E-SE/raw/gh-pages/examples/exam_2021.zip",
   button_label = "Final Exam and solution (2021)",
   button_type = "primary",
   has_icon = TRUE,
@@ -85,7 +85,7 @@ download_link(
 
 ```{r,echo=F}
 download_link(
-  link = "https://github.com/master-ds2e/M1-Programming/raw/gh-pages/examples/exam_2022.pdf",
+  link = "https://github.com/P-Pelletier/M1-R-DS2E-SE/raw/gh-pages/examples/exam_2022.pdf",
   button_label = "Final Exam (2022)",
   button_type = "primary",
   has_icon = TRUE,
@@ -98,7 +98,7 @@ download_link(
 
 ```{r,echo=F}
 download_link(
-  link = "https://github.com/master-ds2e/M1-Programming/raw/gh-pages/examples/exam_2023.zip",
+  link = "https://github.com/P-Pelletier/M1-R-DS2E-SE/raw/gh-pages/examples/exam_2023.zip",
   button_label = "Final Exam (2023)",
   button_type = "primary",
   has_icon = TRUE,
